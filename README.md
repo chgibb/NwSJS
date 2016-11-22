@@ -26,6 +26,7 @@ bash refreshTests.bash
 ```
 
 Download test262-node-harness (through npm. Declared in package.json).
+See https://github.com/bterlson/test262-harness for more information.
 ```
 npm install
 ```
