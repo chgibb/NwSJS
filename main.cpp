@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
         return 1;
     }
     std::vector<std::string> tokens;
-    if(!::MakeWordsFromFile(std::string(argv[1]),tokens,false))
+    if(!::MakeWordsFromFile(std::string(argv[1]),tokens))
     {
         std::cout<<"Could not open "<<argv[1]<<"\n";
         return 1;
