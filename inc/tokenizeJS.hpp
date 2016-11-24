@@ -5,7 +5,7 @@
 #include <algorithm>
 //parse file identified by string filename into individual words
 //held in tokenlist
-bool MakeWordsFromFile(std::string filename,std::vector<std::string>&tokenlist)
+bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist)
 {
     std::ifstream file(filename.c_str(),std::ios::in);
     char byte;
@@ -109,10 +109,11 @@ bool MakeWordsFromFile(std::string filename,std::vector<std::string>&tokenlist)
                 add = false;
             break;
             case '\n':
-                str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
+                str += "\n";
+                //str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
                 str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
-                tokenlist.push_back(str);
+                    tokenlist.push_back(str);
                 str = "";
                 add = false;
             break;

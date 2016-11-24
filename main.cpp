@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "MakeWordsFromFile.hpp"
+#include "inc/tokenizeJS.hpp"
 using namespace std;
 int main(int argc, char* argv[])
 {
@@ -16,13 +16,12 @@ int main(int argc, char* argv[])
         return 1;
     }
     std::vector<std::string> tokens;
-    if(!::MakeWordsFromFile(std::string(argv[1]),tokens))
+    if(!::tokenizeJS(std::string(argv[1]),tokens))
     {
         std::cout<<"Could not open "<<argv[1]<<"\n";
         return 1;
     }
     auto end = tokens.end();
-    //int perLine = 25;
     for(auto it = tokens.begin(); it != end; ++it)
     {
         if(*it == "var" || *it == "function" || *it == "return" ||
@@ -33,8 +32,6 @@ int main(int argc, char* argv[])
             std::cout<<*it<<" ";
         else
             std::cout<<*it;
-	if(*it == "{")
-		std::cout<<"\n";
     }
     return 0;
 }
