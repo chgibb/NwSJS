@@ -22,7 +22,6 @@ int main(int argc, char* argv[])
         return 1;
     }
     auto end = tokens.end();
-    //int perLine = 25;
     for(auto it = tokens.begin(); it != end; ++it)
     {
         if(*it == "var" || *it == "function" || *it == "return" ||
@@ -31,8 +30,6 @@ int main(int argc, char* argv[])
             std::cout<<*it<<" ";
         else
             std::cout<<*it;
-	if(*it == "{")
-		std::cout<<"\n";
     }
     return 0;
 }
