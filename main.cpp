@@ -27,7 +27,9 @@ int main(int argc, char* argv[])
     {
         if(*it == "var" || *it == "function" || *it == "return" ||
          *it == "new" || *it == "else" || *it == "typeof" || *it == "class" ||
-         *it == "throw" || *it == "let" || *it == "const" || *it == "await" || *it == "async" || *it == "yield" || *it == "break" || *it == "continue" || *it == "case")
+         *it == "throw" || *it == "let" || *it == "const" || *it == "await" || 
+		 *it == "async" || *it == "yield" || *it == "break" || *it == "continue" ||
+		 *it == "case")
             std::cout<<*it<<" ";
         else
             std::cout<<*it;
