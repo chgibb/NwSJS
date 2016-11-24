@@ -40,3 +40,9 @@ Run the test harness on the compressed test files.
 ```
 bash run.bash > log
 ```
+
+Get total number of errors caused by NwSJS
+```
+grep SyntaxError: log | wc -l
+```
+Output should (hopefuly) be 0.
