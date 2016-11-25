@@ -68,8 +68,8 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,int&pars
                 }
             break;
             case ' ':
-                //if(!parseOptions&nwsjs::options::spaces)
-                 //   str += " ";
+                if((parseOptions&nwsjs::options::spaces) == 0)
+                    str += " ";
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
                 //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
