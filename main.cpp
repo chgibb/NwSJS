@@ -15,8 +15,23 @@ int main(int argc, char* argv[])
         std::cout<<"Insufficient arguments";
         return 1;
     }
+    std::vector<std::string> args;
+    for(int i = 0; i != argc; i++)
+    {
+        args.push_back(argv[i]);
+    }
+    int parseOptions = 0;
+    for(auto it = args.begin(); it != args.end(); ++it)
+    {
+        if(*it == "--comments")
+            parseOptions |= nwsjs::options::comments;
+        if(*it == "--spaces")
+            parseOptions |= nwsjs::options::spaces;
+        if(*it == "--tabs")
+            parseOptions |= nwsjs::options::tabs;
+    }
     std::vector<std::string> tokens;
-    if(!::tokenizeJS(std::string(argv[1]),tokens))
+    if(!::tokenizeJS(std::string(argv[1]),tokens,parseOptions))
     {
         std::cout<<"Could not open "<<argv[1]<<"\n";
         return 1;
@@ -26,7 +41,9 @@ int main(int argc, char* argv[])
     {
         if(*it == "var" || *it == "function" || *it == "return" ||
          *it == "new" || *it == "else" || *it == "typeof" || *it == "class" ||
-         *it == "throw" || *it == "let" || *it == "const" || *it == "await" || *it == "async" || *it == "yield" || *it == "break" || *it == "continue" || *it == "case")
+         *it == "throw" || *it == "let" || *it == "const" || *it == "await" || 
+		 *it == "async" || *it == "yield" || *it == "break" || *it == "continue" ||
+		 *it == "case")
             std::cout<<*it<<" ";
         else
             std::cout<<*it;

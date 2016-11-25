@@ -5,7 +5,16 @@
 #include <algorithm>
 //parse file identified by string filename into individual words
 //held in tokenlist
-bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist)
+namespace nwsjs
+{
+    namespace options
+    {
+        int comments = 0x01;
+        int spaces = 0x02;
+        int tabs = 0x03;
+    }
+}
+bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,int&parseOptions)
 {
     std::ifstream file(filename.c_str(),std::ios::in);
     char byte;
@@ -19,45 +28,50 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist)
         switch(byte)
         {
             case '/':
-                file.get(byte);
-                //single line
-                if(byte == '/')
+                if(parseOptions&nwsjs::options::comments)
                 {
-                    //consume the line
-                    while(byte != '\n')
+                    file.get(byte);
+                    //single line
+                    if(byte == '/')
                     {
-                        file.get(byte);
-                    }
-                    break;
-                }
-                //multi line
-                else if(byte == '*')
-                {
-                    for(;;)
-                    {
-                        file.get(byte);
-                        if(byte == '*')
+                        //consume the line
+                        while(byte != '\n')
                         {
                             file.get(byte);
-                            if(byte == '/')
+                        }
+                        break;
+                    }
+                    //multi line
+                    else if(byte == '*')
+                    {
+                        for(;;)
+                        {
+                            file.get(byte);
+                            if(byte == '*')
                             {
                                 file.get(byte);
-                                break;
+                                if(byte == '/')
+                                {
+                                    file.get(byte);
+                                    break;
+                                }
                             }
                         }
+                        break;
                     }
-                    break;
-                }
-                else
-                {
-                    str += "/";
-                    str += byte;
-                    file.get(byte);
+                    else
+                    {
+                        str += "/";
+                        str += byte;
+                        file.get(byte);
+                    }
                 }
             break;
             case ' ':
+                if((parseOptions&nwsjs::options::spaces) == 0)
+                    str += " ";
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
+                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
                     tokenlist.push_back(str);
                 str = "";
@@ -66,7 +80,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist)
             case '(':
                 str += "(";
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
+                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
                     tokenlist.push_back(str);
                 str = "";
@@ -75,7 +89,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist)
             case ')':
                 str += ")";
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
+                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
                     tokenlist.push_back(str);
                 str = "";
@@ -84,7 +98,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist)
             case '{':
                 str += "{";
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
+                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
                     tokenlist.push_back(str);
                 str = "";
@@ -93,7 +107,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist)
             case '}':
                 str += "}";
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
+                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
                     tokenlist.push_back(str);
                 str = "";
@@ -102,7 +116,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist)
             case ',':
                 str += ",";
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
+                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
                     tokenlist.push_back(str);
                 str = "";
@@ -111,7 +125,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist)
             case '\n':
                 str += "\n";
                 //str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
+                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
                     tokenlist.push_back(str);
                 str = "";
@@ -138,7 +152,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist)
                 }
             break;
         }
-        if(add && byte != '\t' && byte != '\'' && byte != '\"')
+        if(add && byte != '\'' && byte != '\"')
             str += byte;
     }
 	file.close();
