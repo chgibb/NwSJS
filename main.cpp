@@ -20,17 +20,18 @@ int main(int argc, char* argv[])
     {
         args.push_back(argv[i]);
     }
-    int options = 0;
+    int parseOptions = 0;
     for(auto it = args.begin(); it != args.end(); ++it)
     {
         if(*it == "--comments")
-            options |= nwsjs::options::comments;
+            parseOptions |= nwsjs::options::comments;
         if(*it == "--spaces")
-            options |= nwsjs::options::spaces;
+            parseOptions |= nwsjs::options::spaces;
+        if(*it == "--tabs")
+            parseOptions |= nwsjs::options::tabs;
     }
-    return 0;
     std::vector<std::string> tokens;
-    if(!::tokenizeJS(std::string(argv[1]),tokens))
+    if(!::tokenizeJS(std::string(argv[1]),tokens,parseOptions))
     {
         std::cout<<"Could not open "<<argv[1]<<"\n";
         return 1;
