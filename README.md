@@ -8,9 +8,27 @@ Currently tends to choke on files > 500kb.
 ## Usage
 ### Running
 ``` 
-./nwsjs srcFile.js > outFile.js
+./nwsjs srcFile.js --comments --spaces --tabs > outFile.js
 ```
 Note: srcFile.js and outFile.js must NOT be the same file!
+
+#### Options
+```
+--comments
+```
+Strip comments from srcFile.js
+
+
+```
+--spaces
+```
+Strip spaces from srcFile.js
+
+```
+--tabs
+```
+Strip tabs from srcFile.js
+
 
 ### Building
 ```
