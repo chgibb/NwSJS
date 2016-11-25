@@ -5,6 +5,14 @@
 #include <algorithm>
 //parse file identified by string filename into individual words
 //held in tokenlist
+namespace nwsjs
+{
+    namespace options
+    {
+        int comments = 0x01;
+        int spaces = 0x02;
+    }
+}
 bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist)
 {
     std::ifstream file(filename.c_str(),std::ios::in);

@@ -15,6 +15,20 @@ int main(int argc, char* argv[])
         std::cout<<"Insufficient arguments";
         return 1;
     }
+    std::vector<std::string> args;
+    for(int i = 0; i != argc; i++)
+    {
+        args.push_back(argv[i]);
+    }
+    int options = 0;
+    for(auto it = args.begin(); it != args.end(); ++it)
+    {
+        if(*it == "--comments")
+            options |= nwsjs::options::comments;
+        if(*it == "--spaces")
+            options |= nwsjs::options::spaces;
+    }
+    return 0;
     std::vector<std::string> tokens;
     if(!::tokenizeJS(std::string(argv[1]),tokens))
     {
