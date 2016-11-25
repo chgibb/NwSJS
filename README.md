@@ -13,22 +13,20 @@ Currently tends to choke on files > 500kb.
 Note: srcFile.js and outFile.js must NOT be the same file!
 
 #### Options
+Strip comments from srcFile.js
 ```
 --comments
 ```
-Strip comments from srcFile.js
 
-
+Strip spaces from srcFile.js
 ```
 --spaces
 ```
-Strip spaces from srcFile.js
 
+Strip tabs from srcFile.js
 ```
 --tabs
 ```
-Strip tabs from srcFile.js
-
 
 ### Building
 ```
