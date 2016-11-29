@@ -26,7 +26,7 @@ namespace nwsjs
     }
 }
 template<class T>
-bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,int&parseOptions,T&stream)
+bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
 {
     std::ifstream file(filename.c_str(),std::ios::in);
     char byte;
@@ -85,7 +85,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,int&pars
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
                 //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
-                    tokenlist.push_back(str);
+                    stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
                 add = false;
             break;
@@ -94,7 +94,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,int&pars
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
                 //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
-                    tokenlist.push_back(str);
+                    stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
                 add = false;
             break;
@@ -103,7 +103,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,int&pars
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
                 //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
-                    tokenlist.push_back(str);
+                    stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
                 add = false;
             break;
@@ -112,7 +112,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,int&pars
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
                 //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
-                    tokenlist.push_back(str);
+                    stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
                 add = false;
             break;
@@ -121,7 +121,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,int&pars
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
                 //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
-                    tokenlist.push_back(str);
+                    stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
                 add = false;
             break;
@@ -130,7 +130,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,int&pars
                 str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
                 //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
-                    tokenlist.push_back(str);
+                    stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
                 add = false;
             break;
@@ -139,7 +139,7 @@ bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,int&pars
                 //str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
                 //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
-                    tokenlist.push_back(str);
+                    stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
                 add = false;
             break;

@@ -31,22 +31,10 @@ int main(int argc, char* argv[])
             parseOptions |= nwsjs::options::tabs;
     }
     std::vector<std::string> tokens;
-    if(!::tokenizeJS<decltype(std::cout)>(std::string(argv[1]),tokens,parseOptions,std::cout))
+    if(!::tokenizeJS<decltype(std::cout)>(std::string(argv[1]),parseOptions,std::cout))
     {
         std::cout<<"Could not open "<<argv[1]<<"\n";
         return 1;
-    }
-    auto end = tokens.end();
-    for(auto it = tokens.begin(); it != end; ++it)
-    {
-        if(*it == "var" || *it == "function" || *it == "return" ||
-         *it == "new" || *it == "else" || *it == "typeof" || *it == "class" ||
-         *it == "throw" || *it == "let" || *it == "const" || *it == "await" || 
-		 *it == "async" || *it == "yield" || *it == "break" || *it == "continue" ||
-		 *it == "case")
-            std::cout<<*it<<" ";
-        else
-            std::cout<<*it;
     }
     return 0;
 }
