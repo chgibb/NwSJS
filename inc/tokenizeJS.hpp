@@ -75,7 +75,7 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
                     else
                     {
                         str += "/";
-                        str += byte;
+                        //str += byte;
                         //file.get(byte);
                     }
                 }
