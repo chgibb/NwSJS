@@ -5,7 +5,8 @@
 #include <algorithm>
 //parse file identified by string filename into individual words
 //held in tokenlist
-bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist)
+template<class T>
+bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,T&stream)
 {
     std::ifstream file(filename.c_str(),std::ios::in);
     char byte;
