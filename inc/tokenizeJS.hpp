@@ -51,6 +51,7 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
                         {
                             file.get(byte);
                         }
+                        stream<<"\n";
                         break;
                     }
                     //multi line
@@ -75,7 +76,7 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
                     {
                         str += "/";
                         str += byte;
-                        file.get(byte);
+                        //file.get(byte);
                     }
                 }
             break;
