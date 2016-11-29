@@ -7,6 +7,17 @@
 //held in tokenlist
 namespace nwsjs
 {
+    std::string addWhiteSpaceToToken(std::string&token)
+    {
+        if(token == "var" || token == "function" || token == "return" ||
+        token == "new" || token == "else" || token == "typeof" || token == "class" ||
+        token == "throw" || token == "let" || token == "const" || token == "await" || 
+        token == "async" || token == "yield" || token == "break" || token == "continue" ||
+        token == "case")
+            return token + " ";
+        else
+            return token;
+    }
     namespace options
     {
         int comments = 0x01;
