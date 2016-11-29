@@ -14,7 +14,8 @@ namespace nwsjs
         int tabs = 0x03;
     }
 }
-bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,int&parseOptions)
+template<class T>
+bool tokenizeJS(std::string filename,std::vector<std::string>&tokenlist,int&parseOptions,T&stream)
 {
     std::ifstream file(filename.c_str(),std::ios::in);
     char byte;
