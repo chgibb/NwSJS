@@ -47,8 +47,12 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
                     if(byte == '/')
                     {
                         //consume the line
-                        while(byte != '\n')
+                        for(;;)
                         {
+                            if(byte == '\n')
+                                break;
+                            if(byte == '\r\n')
+                                break;
                             file.get(byte);
                         }
                         stream<<"\n";
