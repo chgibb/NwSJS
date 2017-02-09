@@ -27,13 +27,13 @@ namespace nwsjs
     {
         int comments = 0x01;
         int spaces = 0x02;
-        int tabs = 0x03;
+        int tabs = 0x04;
     }
     std::vector<char> delimTokens{
         '(',')',
         '{','}',
         ',',';',':',
-        '=','\n','\t'
+        '=','\n'
     };
     auto delimTokensEnd = delimTokens.end();
 }
@@ -125,6 +125,16 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
             {
                 if((parseOptions&nwsjs::options::spaces) == 0)
                     str += " ";
+                if(str != "")
+                    stream<<nwsjs::addWhiteSpaceToToken(str);
+                str = "";
+                add = false;
+                break;
+            }
+            if(byte == '\t')
+            {
+                if((parseOptions&nwsjs::options::tabs) == 0)
+                    str += "\t";
                 if(str != "")
                     stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
