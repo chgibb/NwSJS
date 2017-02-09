@@ -11,7 +11,7 @@ namespace nwsjs
         token == "new" || token == "else" || token == "typeof" || token == "class" ||
         token == "throw" || token == "let" || token == "const" || token == "await" || 
         token == "async" || token == "yield" || token == "break" || token == "continue" ||
-        token == "case")
+        token == "case" || token == "in")
             return token + " ";
         else
             return token;
