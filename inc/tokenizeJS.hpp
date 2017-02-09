@@ -33,7 +33,8 @@ namespace nwsjs
         '(',')',
         '{','}',
         ',',';',':',
-        '=','\n'
+        '=','+','-','*','/','|','&',
+        '\n'
     };
     auto delimTokensEnd = delimTokens.end();
     //parse file identified by string filename into individual words
