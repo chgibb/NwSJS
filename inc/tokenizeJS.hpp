@@ -7,14 +7,17 @@ namespace nwsjs
 {
     std::string addWhiteSpaceToToken(std::string&token)
     {
+        //stderr(token.c_str());
+        fprintf(stderr,"token: \"%s\"\n",token.c_str());
         if(token == "var" || token == "function" || token == "return" ||
         token == "new" || token == "else" || token == "typeof" || token == "class" ||
         token == "throw" || token == "let" || token == "const" || token == "await" || 
         token == "async" || token == "yield" || token == "break" || token == "continue" ||
-        token == "case" || token == "in")
+        token == "case")
             return token + " ";
-        else
-            return token;
+        else if(token == "in")
+            return " "+token+" ";
+        return token;
     }
     void stripChar(std::string&str,char&c)
     {
@@ -91,8 +94,6 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
             case ' ':
                 if((parseOptions&nwsjs::options::spaces) == 0)
                     str += " ";
-                str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
                     stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
@@ -100,8 +101,6 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
             break;
             case '(':
                 str += "(";
-                str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
                     stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
@@ -109,8 +108,6 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
             break;
             case ')':
                 str += ")";
-                str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
                     stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
@@ -118,8 +115,6 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
             break;
             case '{':
                 str += "{";
-                str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
                     stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
@@ -127,8 +122,6 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
             break;
             case '}':
                 str += "}";
-                str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
                 if(str != "")
                     stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
@@ -136,8 +129,20 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
             break;
             case ',':
                 str += ",";
-                str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
+                if(str != "")
+                    stream<<nwsjs::addWhiteSpaceToToken(str);
+                str = "";
+                add = false;
+            break;
+            case ';':
+                str += ";";
+                if(str != "")
+                    stream<<nwsjs::addWhiteSpaceToToken(str);
+                str = "";
+                add = false;
+            break;
+            case '=':
+                str += "=";
                 if(str != "")
                     stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
@@ -145,8 +150,13 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
             break;
             case '\n':
                 str += "\n";
-                //str.erase(std::remove(str.begin(),str.end(),'\n'),str.end());
-                //str.erase(std::remove(str.begin(),str.end(),'\t'),str.end());
+                if(str != "")
+                    stream<<nwsjs::addWhiteSpaceToToken(str);
+                str = "";
+                add = false;
+            break;
+            case '\t':
+                str += "\t";
                 if(str != "")
                     stream<<nwsjs::addWhiteSpaceToToken(str);
                 str = "";
