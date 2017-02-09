@@ -3,8 +3,6 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
-//parse file identified by string filename into individual words
-//held in tokenlist
 namespace nwsjs
 {
     std::string addWhiteSpaceToToken(std::string&token)
@@ -25,6 +23,8 @@ namespace nwsjs
         int tabs = 0x03;
     }
 }
+//parse file identified by string filename into individual words
+//held in tokenlist
 template<class T>
 bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
 {
