@@ -30,7 +30,6 @@ namespace nwsjs
         int tabs = 0x03;
     }
     std::vector<char> delimTokens{
-        ' ',
         '(',')',
         '{','}',
         ',',';',':',
@@ -122,8 +121,19 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
         }
         for(auto it = nwsjs::delimTokens.begin(); it != nwsjs::delimTokensEnd; ++it)
         {
+            if(byte == ' ')
+            {
+                if((parseOptions&nwsjs::options::spaces) == 0)
+                    str += " ";
+                if(str != "")
+                    stream<<nwsjs::addWhiteSpaceToToken(str);
+                str = "";
+                add = false;
+                break;
+            }
             if(byte == *it)
             {
+
                 str += *it;
                 if(str != "")
                     stream<<nwsjs::addWhiteSpaceToToken(str);
