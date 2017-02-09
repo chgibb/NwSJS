@@ -30,7 +30,6 @@ int main(int argc, char* argv[])
         if(*it == "--tabs")
             parseOptions |= nwsjs::options::tabs;
     }
-    std::vector<std::string> tokens;
     if(!::tokenizeJS<decltype(std::cout)>(std::string(argv[1]),parseOptions,std::cout))
     {
         std::cout<<"Could not open "<<argv[1]<<"\n";
