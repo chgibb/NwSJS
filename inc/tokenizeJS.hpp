@@ -16,6 +16,10 @@ namespace nwsjs
         else
             return token;
     }
+    void stripChar(std::string&str,char&c)
+    {
+        str.erase(std::remove(str.begin(),str.end(),c),str.end());
+    }
     namespace options
     {
         int comments = 0x01;
@@ -51,8 +55,8 @@ bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
                         {
                             if(byte == '\n')
                                 break;
-                            if(byte == '\r\n')
-                                break;
+                      //      if(byte == '\r\n')
+                        //          break;
                             file.get(byte);
                         }
                         stream<<"\n";
