@@ -36,125 +36,124 @@ namespace nwsjs
         '=','\n'
     };
     auto delimTokensEnd = delimTokens.end();
-}
-//parse file identified by string filename into individual words
-//held in tokenlist
-template<class T>
-bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
-{
-    std::ifstream file(filename.c_str(),std::ios::in);
-    char byte;
-    std::string str;
-    bool add = true;
-    if(file.fail())
-		return false;
-    while(file.get(byte))
+    //parse file identified by string filename into individual words
+    //held in tokenlist
+    template<class T>
+    bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
     {
-        add = true;
-        switch(byte)
+        std::ifstream file(filename.c_str(),std::ios::in);
+        char byte;
+        std::string str;
+        bool add = true;
+        if(file.fail())
+		    return false;
+        while(file.get(byte))
         {
-            case '/':
-                if(parseOptions&nwsjs::options::comments)
-                {
-                    file.get(byte);
-                    //single line
-                    if(byte == '/')
+            add = true;
+            switch(byte)
+            {
+                case '/':
+                    if(parseOptions&nwsjs::options::comments)
                     {
-                        //consume the line
-                        for(;;)
+                        file.get(byte);
+                        //single line
+                        if(byte == '/')
                         {
-                            if(byte == '\n')
-                                break;
-                      //      if(byte == '\r\n')
-                        //          break;
-                            file.get(byte);
+                            //consume the line
+                            for(;;)
+                            {
+                                if(byte == '\n')
+                                    break;
+                        //      if(byte == '\r\n')
+                            //          break;
+                                file.get(byte);
+                            }
+                            stream<<"\n";
+                            break;
                         }
-                        stream<<"\n";
-                        break;
-                    }
-                    //multi line
-                    else if(byte == '*')
-                    {
-                        for(;;)
+                        //multi line
+                        else if(byte == '*')
                         {
-                            file.get(byte);
-                            if(byte == '*')
+                            for(;;)
                             {
                                 file.get(byte);
-                                if(byte == '/')
+                                if(byte == '*')
                                 {
                                     file.get(byte);
-                                    break;
+                                    if(byte == '/')
+                                    {
+                                        file.get(byte);
+                                        break;
+                                    }
                                 }
                             }
+                            break;
                         }
-                        break;
+                        else
+                        {
+                            str += "/";
+                            //str += byte;
+                            //file.get(byte);
+                        }
                     }
-                    else
+                break;
+                case '\"':
+                    str += byte;
+                    for(;;)
                     {
-                        str += "/";
-                        //str += byte;
-                        //file.get(byte);
+                        file.get(byte);
+                        str += byte;
+                        if(byte == '\"')
+                            break;
                     }
-                }
-            break;
-            case '\"':
-                str += byte;
-                for(;;)
-                {
-                    file.get(byte);
+                break;
+                case '\'':
                     str += byte;
-                    if(byte == '\"')
-                        break;
-                }
-            break;
-            case '\'':
-                str += byte;
-                for(;;)
+                    for(;;)
+                    {
+                        file.get(byte);
+                        str += byte;
+                        if(byte == '\'')
+                            break;
+                    }
+                break;
+            }
+            for(auto it = nwsjs::delimTokens.begin(); it != nwsjs::delimTokensEnd; ++it)
+            {
+                if(byte == ' ')
                 {
-                    file.get(byte);
-                    str += byte;
-                    if(byte == '\'')
-                        break;
+                    if((parseOptions&nwsjs::options::spaces) == 0)
+                        str += " ";
+                    if(str != "")
+                        stream<<nwsjs::addWhiteSpaceToToken(str);
+                    str = "";
+                    add = false;
+                    break;
                 }
-            break;
+                if(byte == '\t')
+                {
+                    if((parseOptions&nwsjs::options::tabs) == 0)
+                        str += "\t";
+                    if(str != "")
+                        stream<<nwsjs::addWhiteSpaceToToken(str);
+                    str = "";
+                    add = false;
+                    break;
+                }
+                if(byte == *it)
+                {
+                    str += *it;
+                    if(str != "")
+                        stream<<nwsjs::addWhiteSpaceToToken(str);
+                    str = "";
+                    add = false;
+                    break;
+                }
+            }
+            if(add && byte != '\'' && byte != '\"')
+                str += byte;
         }
-        for(auto it = nwsjs::delimTokens.begin(); it != nwsjs::delimTokensEnd; ++it)
-        {
-            if(byte == ' ')
-            {
-                if((parseOptions&nwsjs::options::spaces) == 0)
-                    str += " ";
-                if(str != "")
-                    stream<<nwsjs::addWhiteSpaceToToken(str);
-                str = "";
-                add = false;
-                break;
-            }
-            if(byte == '\t')
-            {
-                if((parseOptions&nwsjs::options::tabs) == 0)
-                    str += "\t";
-                if(str != "")
-                    stream<<nwsjs::addWhiteSpaceToToken(str);
-                str = "";
-                add = false;
-                break;
-            }
-            if(byte == *it)
-            {
-
-                str += *it;
-                if(str != "")
-                    stream<<nwsjs::addWhiteSpaceToToken(str);
-                str = "";
-                add = false;
-                break;
-            }
-        }
-        if(add && byte != '\'' && byte != '\"')
-            str += byte;
+	    file.close();
+        return true;
     }
-	file.close();
-    return true;
 }
