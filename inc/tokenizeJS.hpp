@@ -38,8 +38,7 @@ namespace nwsjs
         '\n'
     };
     auto delimTokensEnd = delimTokens.end();
-    //parse file identified by string filename into individual words
-    //held in tokenlist
+
     template<class T>
     bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
     {
