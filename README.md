@@ -2,7 +2,7 @@
 ## No White Space JavaScript
 
 Simple, lightweight, cross-platform CLI utility to strip whitespace and comments from Javascript source code.
-Approximately 75x faster, wth 25% less CPU usage than UglifyJS at the same task.
+Approximately 75x faster, with 25% less CPU usage than UglifyJS at the same task.
 Currently tends to choke on files > 500kb.
 
 ## Usage
