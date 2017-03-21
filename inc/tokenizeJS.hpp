@@ -43,6 +43,7 @@ namespace nwsjs
     {
         std::ifstream file(filename.c_str(),std::ios::in);
         char byte;
+        char lastByte = ' ';
         std::string str;
         bool add = true;
         if(file.fail())
@@ -75,15 +76,12 @@ namespace nwsjs
                             for(;;)
                             {
                                 file.get(byte);
-                                if(byte == '*')
+                                if(lastByte == '*' && byte == '/')
                                 {
                                     file.get(byte);
-                                    if(byte == '/')
-                                    {
-                                        file.get(byte);
-                                        break;
-                                    }
+                                    break;
                                 }
+                                lastByte = byte;
                             }
                             break;
                         }
