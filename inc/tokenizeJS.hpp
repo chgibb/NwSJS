@@ -65,8 +65,6 @@ namespace nwsjs
                             {
                                 if(byte == '\n')
                                     break;
-                        //      if(byte == '\r\n')
-                            //          break;
                                 file.get(byte);
                             }
                             stream<<"\n";
@@ -93,8 +91,6 @@ namespace nwsjs
                         else
                         {
                             str += "/";
-                            //str += byte;
-                            //file.get(byte);
                         }
                     }
                 break;
