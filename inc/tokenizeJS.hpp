@@ -7,7 +7,6 @@ namespace nwsjs
 {
     std::string addWhiteSpaceToToken(std::string&token)
     {
-        //stderr(token.c_str());
         fprintf(stderr,"token: \"%s\"\n",token.c_str());
         if(token == "var" || token == "function" || token == "return" ||
         token == "new" || token == "else" || token == "typeof" || token == "class" ||
@@ -15,7 +14,7 @@ namespace nwsjs
         token == "async" || token == "yield" || token == "break" || token == "continue" ||
         token == "case")
             return token + " ";
-        else if(token == "in")
+        else if(token == "in" || token == "instanceof")
             return " "+token+" ";
         return token;
     }
@@ -44,6 +43,7 @@ namespace nwsjs
     {
         std::ifstream file(filename.c_str(),std::ios::in);
         char byte;
+        char lastByte = ' ';
         std::string str;
         bool add = true;
         if(file.fail())
@@ -65,8 +65,6 @@ namespace nwsjs
                             {
                                 if(byte == '\n')
                                     break;
-                        //      if(byte == '\r\n')
-                            //          break;
                                 file.get(byte);
                             }
                             stream<<"\n";
@@ -78,23 +76,25 @@ namespace nwsjs
                             for(;;)
                             {
                                 file.get(byte);
-                                if(byte == '*')
+                                if(lastByte == '*' && byte == '/')
                                 {
                                     file.get(byte);
-                                    if(byte == '/')
-                                    {
-                                        file.get(byte);
-                                        break;
-                                    }
+                                    break;
                                 }
+                                lastByte = byte;
                             }
                             break;
                         }
                         else
                         {
                             str += "/";
-                            //str += byte;
-                            //file.get(byte);
+                            for(;;)
+                            {
+                                str += byte;
+                                if(byte == '\n')
+                                    break;
+                                file.get(byte);
+                            }
                         }
                     }
                 break;
