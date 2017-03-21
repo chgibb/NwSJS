@@ -1,0 +1,11 @@
+language: node_js
+sudo: required
+node_js:
+    - "6"
+addons:
+    apt:
+        packages:
+            - g++-5.4
+script:
+    - bash build.bash
+
