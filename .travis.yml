@@ -9,6 +9,5 @@ addons:
         packages:
             - g++-5
 script:
-    - bash travisGCCExport.bash
     - bash build.bash
 
