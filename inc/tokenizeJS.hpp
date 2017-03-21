@@ -12,9 +12,9 @@ namespace nwsjs
         token == "new" || token == "else" || token == "typeof" || token == "class" ||
         token == "throw" || token == "let" || token == "const" || token == "await" || 
         token == "async" || token == "yield" || token == "break" || token == "continue" ||
-        token == "case" || token == "instanceof")
+        token == "case")
             return token + " ";
-        else if(token == "in")
+        else if(token == "in" || token == "instanceof")
             return " "+token+" ";
         return token;
     }
@@ -90,6 +90,13 @@ namespace nwsjs
                         else
                         {
                             str += "/";
+                            for(;;)
+                            {
+                                str += byte;
+                                if(byte == '\n')
+                                    break;
+                                file.get(byte);
+                            }
                         }
                     }
                 break;
