@@ -1,7 +1,7 @@
 rm nwsjs
 
 CXX="g++"
-if [ "$travis" = true ]; then 
+if [ "$TRAVIS" = true ]; then 
     CXX="g++-5.4"
     printf "Detected TravisCI\n"
 fi
