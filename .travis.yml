@@ -10,4 +10,5 @@ addons:
             - g++-5
 script:
     - bash build.bash
+    - npm test
 

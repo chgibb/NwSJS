@@ -4,3 +4,4 @@ nwsjs
 test262
 log
 *.js
+*.log

@@ -7,12 +7,11 @@ namespace nwsjs
 {
     std::string addWhiteSpaceToToken(std::string&token)
     {
-        fprintf(stderr,"token: \"%s\"\n",token.c_str());
         if(token == "var" || token == "function" || token == "return" ||
         token == "new" || token == "else" || token == "typeof" || token == "class" ||
         token == "throw" || token == "let" || token == "const" || token == "await" || 
         token == "async" || token == "yield" || token == "break" || token == "continue" ||
-        token == "case")
+        token == "case" || token == "void")
             return token + " ";
         else if(token == "in" || token == "instanceof")
             return " "+token+" ";
@@ -33,7 +32,7 @@ namespace nwsjs
         '(',')',
         '{','}',
         ',',';',':',
-        '=','+','-','*','/','|','&',
+        '=','+','-','*','/','|','&','?',
         '\n'
     };
     auto delimTokensEnd = delimTokens.end();
@@ -43,7 +42,7 @@ namespace nwsjs
     {
         std::ifstream file(filename.c_str(),std::ios::in);
         char byte;
-        char lastByte = ' ';
+        char lastByte = ';';
         std::string str;
         bool add = true;
         if(file.fail())
@@ -104,8 +103,9 @@ namespace nwsjs
                     {
                         file.get(byte);
                         str += byte;
-                        if(byte == '\"')
+                        if(byte == '\"' && lastByte != '\\')
                             break;
+                        lastByte = byte;
                     }
                 break;
                 case '\'':
@@ -114,10 +114,34 @@ namespace nwsjs
                     {
                         file.get(byte);
                         str += byte;
-                        if(byte == '\'')
+                        if(byte == '\'' && lastByte != '\\')
                             break;
+                        lastByte = byte;
                     }
                 break;
+                case '`':
+                    str += byte;
+                    for(;;)
+                    {
+                        file.get(byte);
+                        str += byte;
+                        if(byte == '`')
+                            break;
+                    }
+                    continue;
+                break;
+            }
+            if(lastByte == ' ' && byte == '+')
+            {
+                char nextByte;
+                file.get(nextByte);
+                if(nextByte != '+')
+                {
+                    stream<<lastByte;
+                    stream<<byte;
+                    str += nextByte;
+                }
+                continue;
             }
             for(auto it = nwsjs::delimTokens.begin(); it != nwsjs::delimTokensEnd; ++it)
             {
@@ -153,6 +177,8 @@ namespace nwsjs
             }
             if(add && byte != '\'' && byte != '\"')
                 str += byte;
+
+            lastByte = byte;
         }
 	    file.close();
         return true;
