@@ -8,6 +8,9 @@ if [ "$TRAVIS" = true ]; then
     printf "Detected TravisCI\n"
 fi
 
+
+echo $PATH
+
 $CXX --version
 printf "Building nwsjs\n"
 
