@@ -1,7 +1,7 @@
 for f in node_modules/typescript/lib/*.js
 do
     printf "Compressing $f\n"
-    ./nwsjs $f --comments --spaces --tabs > tmp
+    time ./nwsjs $f --comments --spaces --tabs > tmp
     mv tmp $f
 done
 
@@ -17,7 +17,8 @@ do
     if [ $? != 0 ]; then
         exit 1
     fi
-    ./nwsjs bundle$artifact --comments --spaces --tabs > compBundle$artifact
+    printf "Compressing Browserify bundle\n"
+    time ./nwsjs bundle$artifact --comments --spaces --tabs > compBundle$artifact
     if [ $? != 0 ]; then
         exit 1
     fi
