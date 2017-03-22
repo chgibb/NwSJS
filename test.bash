@@ -7,3 +7,7 @@ do
 done
 
 ./node_modules/.bin/tsc index.ts
+
+./node_modules/.bin/browserify index.js --node --debug -o bundle.js
+
+./nwsjs bundle.js --comments --spaces --tabs > compBundle.js
