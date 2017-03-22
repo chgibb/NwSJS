@@ -8,7 +8,7 @@ if [ "$TRAVIS" = true ]; then
     printf "Detected TravisCI\n"
 fi
 
-if [ "$APPVEYOR" = true ]; then
+if [ "$1" = "APPVEYOR" ]; then
     CXX="C:\\mingw\\bin\\g++"
     printf "Detected AppVeyor\n"
 fi
