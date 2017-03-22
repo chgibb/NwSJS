@@ -122,8 +122,9 @@ namespace nwsjs
                     {
                         file.get(byte);
                         str += byte;
-                        if(byte == '\"')
+                        if(byte == '\"' && lastByte != '\\')
                             break;
+                        lastByte = byte;
                     }
                 break;
                 case '\'':
@@ -132,8 +133,9 @@ namespace nwsjs
                     {
                         file.get(byte);
                         str += byte;
-                        if(byte == '\'')
+                        if(byte == '\'' && lastByte != '\\')
                             break;
+                        lastByte = byte;
                     }
                 break;
             }
