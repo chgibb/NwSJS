@@ -8,6 +8,10 @@ if [ "$TRAVIS" = true ]; then
     printf "Detected TravisCI\n"
 fi
 
+if [ "$APPVEYOR" = true ]; then
+    CXX="C:\\mingw\\bin\\g++"
+fi
+
 $CXX --version
 printf "Building nwsjs\n"
 
