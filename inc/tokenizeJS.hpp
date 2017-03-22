@@ -138,6 +138,15 @@ namespace nwsjs
                         lastByte = byte;
                     }
                 break;
+                case '`':
+                    str += byte;
+                    for(;;)
+                    {
+                        file.get(byte);
+                        if(byte == '`')
+                            break;
+                    }
+                break;
             }
             if(lastByte == ' ' && byte == '+')
             {
