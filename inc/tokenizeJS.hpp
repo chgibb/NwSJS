@@ -7,7 +7,7 @@ namespace nwsjs
 {
     std::string addWhiteSpaceToToken(std::string&token)
     {
-        fprintf(stderr,"token: \"%s\"\n",token.c_str());
+        //fprintf(stderr,"token: \"%s\"\n",token.c_str());
         if(token == "var" || token == "function" || token == "return" ||
         token == "new" || token == "else" || token == "typeof" || token == "class" ||
         token == "throw" || token == "let" || token == "const" || token == "await" || 
