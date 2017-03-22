@@ -7,25 +7,6 @@ namespace nwsjs
 {
     std::string addWhiteSpaceToToken(std::string&token)
     {
-        std::string tmp = token;
-        token = "";
-        for(int i = 0; i != tmp.length(); ++i)
-        {
-            if(tmp[i] == '+')
-            {
-                if(i != 0)
-                {
-                    if(tmp[i - 1] == ' ')
-                    {
-                        token += ' ';
-                        token += tmp[i];
-                        continue;
-                    }
-                }
-            }
-            token += tmp[i];
-        }
-        //fprintf(stderr,"token: \"%s\"\n",token.c_str());
         if(token == "var" || token == "function" || token == "return" ||
         token == "new" || token == "else" || token == "typeof" || token == "class" ||
         token == "throw" || token == "let" || token == "const" || token == "await" || 
@@ -147,12 +128,19 @@ namespace nwsjs
                         if(byte == '`')
                             break;
                     }
+                    continue;
                 break;
             }
             if(lastByte == ' ' && byte == '+')
             {
-                stream<<lastByte;
-                stream<<byte;
+                char nextByte;
+                file.get(nextByte);
+                if(nextByte != '+')
+                {
+                    stream<<lastByte;
+                    stream<<byte;
+                    str += nextByte;
+                }
                 continue;
             }
             for(auto it = nwsjs::delimTokens.begin(); it != nwsjs::delimTokensEnd; ++it)
