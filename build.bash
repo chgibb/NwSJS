@@ -17,6 +17,7 @@ $CXX --version
 printf "Building nwsjs\n"
 
 $CXX -c -Wall -fexceptions -fexpensive-optimizations -O3 -std=c++11 -g main.cpp
+printf "$?\n"
 $CXX  -o nwsjs main.o  -s
 ls  
 rm *.o
