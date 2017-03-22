@@ -8,6 +8,11 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "angular": "^1.6.3",
+    "browserify": "^14.1.0",
+    "jquery": "^3.2.1",
+    "typescript": "^2.2.1"
   }
 }
