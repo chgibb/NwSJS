@@ -7,12 +7,30 @@ namespace nwsjs
 {
     std::string addWhiteSpaceToToken(std::string&token)
     {
+        std::string tmp = token;
+        token = "";
+        for(int i = 0; i != tmp.length(); ++i)
+        {
+            if(tmp[i] == '+')
+            {
+                if(i != 0)
+                {
+                    if(tmp[i - 1] == ' ')
+                    {
+                        token += ' ';
+                        token += tmp[i];
+                        continue;
+                    }
+                }
+            }
+            token += tmp[i];
+        }
         //fprintf(stderr,"token: \"%s\"\n",token.c_str());
         if(token == "var" || token == "function" || token == "return" ||
         token == "new" || token == "else" || token == "typeof" || token == "class" ||
         token == "throw" || token == "let" || token == "const" || token == "await" || 
         token == "async" || token == "yield" || token == "break" || token == "continue" ||
-        token == "case")
+        token == "case" || token == "void")
             return token + " ";
         else if(token == "in" || token == "instanceof")
             return " "+token+" ";
@@ -43,7 +61,7 @@ namespace nwsjs
     {
         std::ifstream file(filename.c_str(),std::ios::in);
         char byte;
-        char lastByte = ' ';
+        char lastByte = ';';
         std::string str;
         bool add = true;
         if(file.fail())
@@ -119,6 +137,12 @@ namespace nwsjs
                     }
                 break;
             }
+            if(lastByte == ' ' && byte == '+')
+            {
+                stream<<lastByte;
+                stream<<byte;
+                continue;
+            }
             for(auto it = nwsjs::delimTokens.begin(); it != nwsjs::delimTokensEnd; ++it)
             {
                 if(byte == ' ')
@@ -153,6 +177,8 @@ namespace nwsjs
             }
             if(add && byte != '\'' && byte != '\"')
                 str += byte;
+
+            lastByte = byte;
         }
 	    file.close();
         return true;
