@@ -6,8 +6,29 @@ do
     rm tmp
 done
 
-./node_modules/.bin/tsc index.ts
+for f in *.ts
+do
+    ./node_modules/.bin/tsc $f
+    if [ $? != 0 ]; then
+        exit 1
+    fi
+    artifact=$(echo $f | awk '{gsub("\\.ts",".js");print}')
 
-./node_modules/.bin/browserify index.js --node --debug -o bundle.js
+    ./node_modules/.bin/browserify $artifact --node --debug -o bundle$artifact
+    if [ $? != 0 ]; then
+        exit 1
+    fi
+    ./nwsjs bundle$artifact --comments --spaces --tabs > compBundle$artifact
+    if [ $? != 0 ]; then
+        exit 1
+    fi
 
-./nwsjs bundle.js --comments --spaces --tabs > compBundle.js
+    node bundle$artifact
+    retValBundle=$?
+
+    node compBundle$artifact
+    if [ $? != "$retValBundle" ]; then
+        exit 1
+    fi
+
+done
