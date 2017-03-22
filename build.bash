@@ -12,6 +12,7 @@ fi
 echo $PATH
 if [ "$1" = "APPVEYOR" ]; then
     export PATH=$PATH:/c/mingw/bin
+    export PATH=/usr/bin:$PATH
     printf "Detected AppVeyor\n"
 fi
 
