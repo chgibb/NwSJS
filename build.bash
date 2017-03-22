@@ -10,6 +10,7 @@ fi
 
 if [ "$APPVEYOR" = true ]; then
     CXX="C:\\mingw\\bin\\g++"
+    printf "Detected AppVeyor\n"
 fi
 
 $CXX --version
