@@ -2,7 +2,7 @@ install:
     - cmd: npm install
 
 before_build:
-    - cmd: C:\cygwin\bin\run build.bash
+    - bash build.bash
 
 after_test:
     - cmd: npm test
