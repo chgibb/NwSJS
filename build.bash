@@ -11,7 +11,7 @@ fi
 
 echo $PATH
 if [ "$1" = "APPVEYOR" ]; then
-    CXX="C:\\mingw\\bin\\g++"
+    export PATH=$PATH:/c/mingw/bin
     printf "Detected AppVeyor\n"
 fi
 
