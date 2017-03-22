@@ -1,4 +1,5 @@
-
+require("angular");
+require("jquery");
 class HelloWorld
 {
     public constructor()
