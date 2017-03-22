@@ -9,6 +9,5 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "test262-harness": "^2.3.1"
   }
 }
