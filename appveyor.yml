@@ -1,7 +1,10 @@
 install:
     - cmd: npm install
 
-build:
+
+build: off
+
+after_build:
     - bash build.bash APPVEYOR
 
 test:
