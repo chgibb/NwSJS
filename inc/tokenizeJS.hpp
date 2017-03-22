@@ -143,6 +143,7 @@ namespace nwsjs
                     for(;;)
                     {
                         file.get(byte);
+                        str += byte;
                         if(byte == '`')
                             break;
                     }
