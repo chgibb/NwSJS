@@ -3,7 +3,6 @@ do
     printf "Compressing $f\n"
     ./nwsjs $f --comments --spaces --tabs > tmp
     mv tmp $f
-    rm tmp
 done
 
 for f in *.ts
