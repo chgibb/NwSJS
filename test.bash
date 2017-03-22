@@ -42,12 +42,12 @@ do
     printf "bundle$artifact compressed size $(wc -c < compBundle$artifact)\n\n\n\n"
 
     #Run the uncompressed bundle
-    node bundle$artifact
+    node bundle$artifact &> "bundle$artifact".log
     #Save it's return value
     retValBundle=$?
 
     #Run the compressed bundle
-    node compBundle$artifact
+    node compBundle$artifact &> "compBundle$artifact".log
     #If the return values differ from running the uncompressed and compressed bundles, then we've probably broken something
     #We test return values between the two because some tests use npm packages that don't work in Node and cause it to crash
     #These are used because they're very large and are good to stress test our compressor.
