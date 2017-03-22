@@ -14,7 +14,7 @@ if [ "$1" = "APPVEYOR" ]; then
     export PATH=$PATH:/c/mingw/bin
     export PATH=/usr/bin:$PATH
     printf "Detected AppVeyor\n"
-    cmd /c build.bat
+    ./build.bat
     exit "$?"
 fi
 
