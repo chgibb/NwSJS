@@ -10,10 +10,18 @@ fi
 
 
 echo $PATH
+if [ "$1" = "APPVEYOR" ]; then
+    CXX="C:\\mingw\\bin\\g++"
+    printf "Detected AppVeyor\n"
+fi
 
 $CXX --version
 printf "Building nwsjs\n"
 
-$CXX -Wall -fexceptions -fexpensive-optimizations -O3 -std=c++11  -c main.cpp -o main.o
-$CXX  -o nwsjs main.o  -s  
+$CXX -c -Wall -fexceptions -fexpensive-optimizations -O3 -std=c++11 -g main.cpp > log
+printf "$?\n"
+cat log
+$CXX  -o nwsjs main.o  -s > log
+cat log
+ls  
 rm *.o
