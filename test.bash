@@ -9,6 +9,11 @@ do
     mv tmp $f
     #print its size after compression
     printf "$f compressed size $(wc -c < $f)\n\n\n\n"
+
+    if [ $(wc -c < $f) == "0" ]; then
+        printf "Clobbered $f\n"
+        exit 1
+    fi
 done
 
 #for each of our .ts test files
