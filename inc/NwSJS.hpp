@@ -184,4 +184,26 @@ namespace nwsjs
 	    file.close();
         return true;
     }
+    class StreamPassBuffer
+    {
+        public:
+            StreamPassBuffer() = default;
+            ~StreamPassBuffer() = default;
+            struct StreamByteBuffer
+            {
+                char byte;
+                bool stream;
+            };
+            std::vector<StreamByteBuffer> bytes;
+            void operator<<(std::string&str)
+            {
+                for(unsigned int i = 0; i != str.length(); ++i)
+                {
+                    struct StreamByteBuffer byteBuff;
+                    byteBuff.byte = str[i];
+                    byteBuff.stream = true;
+                    this->bytes.push_back(byteBuff);
+                }
+            }
+    };
 }
