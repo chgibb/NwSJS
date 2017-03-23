@@ -1,19 +1,26 @@
 (set -o igncr) 2>/dev/null && set -o igncr; # For Cygwin on Windows compaibility
+function compressAndPrint {
+    #print its size
+    printf "$1 original size: $(wc -c < $1)\n"
+    #compress it
+    ./nwsjs $1 --comments --spaces --tabs > tmp
+    if [ $? != 0 ]; then
+        printf "NwsJS crashed trying to compress $1\n"
+        exit 1
+    fi
+    mv tmp $1
+    #print its size after compression
+    printf "$1 compressed size $(wc -c < $1)\n\n\n\n"
+
+    if [ $(wc -c < $1) == "0" ]; then
+        printf "Clobbered $1\n"
+        exit 1
+    fi
+}
 #For each .js file in the Typescript compiler distribution
 for f in node_modules/typescript/lib/*.js
 do
-    #print its size
-    printf "$f original size: $(wc -c < $f)\n"
-    #compress it
-    ./nwsjs $f --comments --spaces --tabs > tmp
-    mv tmp $f
-    #print its size after compression
-    printf "$f compressed size $(wc -c < $f)\n\n\n\n"
-
-    if [ $(wc -c < $f) == "0" ]; then
-        printf "Clobbered $f\n"
-        exit 1
-    fi
+    compressAndPrint $f
 done
 
 #for each of our .ts test files
