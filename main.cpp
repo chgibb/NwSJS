@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "inc/tokenizeJS.hpp"
+#include "inc/NwSJS.hpp"
 using namespace std;
 int main(int argc, char* argv[])
 {
