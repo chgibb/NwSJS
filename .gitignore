@@ -1,7 +1,10 @@
-*~
 node_modules
 nwsjs
 test262
 log
 *.js
 *.log
+*.o
+*.exe
+nwsjs.exe
+main.o
