@@ -27,10 +27,8 @@ int main(int argc, char* argv[])
             parseOptions |= nwsjs::options::tabs;
         if(*it == "--newLines")
             parseOptions |= nwsjs::options::newLines;
-        if(*it == "--tokensToStdErr")
-            parseOptions |= nwsjs::options::tokensToStdErr;
     }
-    if(!nwsjs::tokenizeJS<decltype(std::cout)>(std::string(argv[1]),parseOptions,std::cout))
+    if(!nwsjs::tokenizeAndCompress<decltype(std::cout)>(std::string(argv[1]),parseOptions,std::cout))
     {
         std::cout<<"Could not open "<<argv[1]<<"\n";
         return 1;

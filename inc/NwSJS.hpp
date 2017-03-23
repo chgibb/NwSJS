@@ -39,7 +39,7 @@ namespace nwsjs
     auto delimTokensEnd = delimTokens.end();
 
     template<class T>
-    bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
+    bool tokenizeAndCompress(std::string filename,int&parseOptions,T&stream)
     {
         std::ifstream file(filename.c_str(),std::ios::in);
         char byte;
