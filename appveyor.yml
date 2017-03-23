@@ -10,6 +10,7 @@ test_script:
 artifacts:
     - path: nwsjs.exe
     name: NwSJS Windows
+    
 deploy:
     provider: GitHub
     auth_token:
