@@ -28,10 +28,22 @@ int main(int argc, char* argv[])
         if(*it == "--newLines")
             parseOptions |= nwsjs::options::newLines;
     }
-    if(!nwsjs::tokenizeAndCompress<decltype(std::cout)>(std::string(argv[1]),parseOptions,std::cout))
+    if((parseOptions&nwsjs::options::newLines) == 0)
     {
-        std::cout<<"Could not open "<<argv[1]<<"\n";
-        return 1;
+        if(!nwsjs::tokenizeAndCompress<decltype(std::cout)>(std::string(argv[1]),parseOptions,std::cout))
+        {
+            std::cout<<"Could not open "<<argv[1]<<"\n";
+            return 1;
+        }
+    }
+    else if(parseOptions&nwsjs::options::newLines)
+    {
+        nwsjs::StreamPassBuffer passBuff;
+        if(!nwsjs::tokenizeAndCompress<decltype(passBuff)>(std::string(argv[1]),parseOptions,passBuff))
+        {
+            std::cout<<"Could not open "<<argv[1]<<"\n";
+            return 1;
+        }
     }
     return 0;
 }
