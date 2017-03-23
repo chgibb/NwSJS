@@ -13,12 +13,18 @@ function compressAndPrint {
     printf "$1 compressed size $(wc -c < $1)\n\n\n\n"
 
     if [ $(wc -c < $1) == "0" ]; then
-        printf "Clobbered $1\n"
-        exit 1
+        if [ $1 != "node_modules/browserify/lib/_empty.js" ]; then
+            printf "Clobbered $1\n"
+            exit 1
+        fi
     fi
 }
 #For each .js file in the Typescript compiler distribution
 for f in node_modules/typescript/lib/*.js
+do
+    compressAndPrint $f
+done
+for f in node_modules/browserify/**/*.js
 do
     compressAndPrint $f
 done
