@@ -1,3 +1,4 @@
+(set -o igncr) 2>/dev/null && set -o igncr; # For Cygwin on Windows compaibility
 #For each .js file in the Typescript compiler distribution
 for f in node_modules/typescript/lib/*.js
 do
