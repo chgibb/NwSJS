@@ -5,7 +5,7 @@ build_script:
     - bash build.bash APPVEYOR
 
 test_script:
-    - cmd: echo Skipped
+    - cmd: build
 
 artifacts:
     - path: nwsjs.exe
