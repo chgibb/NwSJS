@@ -5,4 +5,12 @@ build_script:
     - bash build.bash APPVEYOR
 
 test_script:
-    - cmd: npm test
+    - cmd: echo Skipped
+
+deploy:
+    provider: GitHub
+    autho_token:
+        secure: fqX7hM2PGofEbimvGZVHX3VfHeKE+IFOQUOH/W96SWtmZNG+nUgou9zbCt6RA5j9
+        artifact: nwsjs.exe
+    on:
+        appveyor_repo_tag: true
