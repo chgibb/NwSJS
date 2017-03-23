@@ -1,7 +1,3 @@
-/*
-    Extremely simple, lightweight CLI utility to strip whitespace and comments from Javascript source code.
-	Approximately 75x faster, with 25% less CPU usage than UglifyJS at the same task. Tends to choke on files > 500kb however.
-*/
 #include <iostream>
 #include <string>
 #include <vector>
