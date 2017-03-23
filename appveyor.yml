@@ -7,10 +7,13 @@ build_script:
 test_script:
     - cmd: echo Skipped
 
+artifacts:
+    - path: nwsjs.exe
+    name: NwSJS Windows
 deploy:
     provider: GitHub
     auth_token:
         secure: fqX7hM2PGofEbimvGZVHX3VfHeKE+IFOQUOH/W96SWtmZNG+nUgou9zbCt6RA5j9
-        artifact: nwsjs.exe
+        artifact: /nwsjs.exe/
     on:
         appveyor_repo_tag: true
