@@ -1,9 +1,7 @@
 # NwSJS
 ## No White Space JavaScript
 
-Simple, lightweight, cross-platform CLI utility to strip whitespace and comments from Javascript source code.
-Approximately 75x faster, with 25% less CPU usage than UglifyJS at the same task.
-Currently tends to choke on files > 500kb.
+Simple, lightweight, ES6 compliant cross-platform CLI utility to strip whitespace and comments from Javascript source code.
 
 ## Usage
 ### Running
@@ -33,32 +31,18 @@ Strip tabs from srcFile.js
 bash build.bash
 ```
 
-### Testing
-NwSJS is tested against Ecma International, Technical Committee 39's test suite. See https://github.com/tc39/test262 for more information. Tests are run using test262-node-harness
-
-Clone test262 repo.
-```
-bash refreshTests.bash
-```
-
-Download test262-node-harness (through npm. Declared in package.json).
-See https://github.com/bterlson/test262-harness for more information.
+## Testing
+Download dependencies for testing
 ```
 npm install
 ```
 
-Run NwSJS on the test files.
+Run test suite
 ```
-bash compressTests.bash
-```
-
-Run the test harness on the compressed test files.
-```
-bash run.bash > log
+npm test
 ```
 
-Get total number of errors caused by NwSJS
-```
-grep SyntaxError: log | wc -l
-```
-Output should (hopefuly) be 0.
+### Testing Process
+NwSJS is tested against Microsoft's Typescript compiler and the Browserify Javascript bundler. The version of tsc downloaded by running ```npm install``` is itself compressed with NwSJS before being used to compile each .ts file. If NwSJS crashes or the compiler raises an error while compiling then the test fails.  
+
+Each compiled .ts file is then bundled using Browserify. The resulting bundles are then compressed. The compressed and uncompressed bundles are run and their return codes are compared. If the return codes differ, then the test fails.
