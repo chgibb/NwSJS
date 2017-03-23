@@ -26,7 +26,8 @@ namespace nwsjs
         int comments = 0x01;
         int spaces = 0x02;
         int tabs = 0x04;
-        int tokensToStdErr = 0x08;
+        int newLines = 0x08;
+
     }
     std::vector<char> delimTokens{
         '(',')',

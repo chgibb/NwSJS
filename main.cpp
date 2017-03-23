@@ -25,6 +25,8 @@ int main(int argc, char* argv[])
             parseOptions |= nwsjs::options::spaces;
         if(*it == "--tabs")
             parseOptions |= nwsjs::options::tabs;
+        if(*it == "--newLines")
+            parseOptions |= nwsjs::options::newLines;
         if(*it == "--tokensToStdErr")
             parseOptions |= nwsjs::options::tokensToStdErr;
     }
