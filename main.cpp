@@ -16,7 +16,6 @@ int main(int argc, char* argv[])
     {
         args.push_back(argv[i]);
     }
-    int parseOptions = 0;
     for(auto it = args.begin(); it != args.end(); ++it)
     {
         if(*it == "--comments")
@@ -36,17 +35,12 @@ int main(int argc, char* argv[])
             return 1;
         }
     }
-    else if(parseOptions&nwsjs::options::newLines)
+    else if(nwsjs::options::newLines)
     {
         nwsjs::StreamPassBuffer passBuff;
-        /*if(!nwsjs::tokenizeAndCompress<decltype(passBuff)>(std::string(argv[1]),parseOptions,passBuff))
-        {
-            std::cout<<"Could not open "<<argv[1]<<"\n";
-            return 1;
-        }*/
         nwsjs::tokenizeAndCompress<decltype(passBuff)>(std::string(argv[1]),passBuff);
         nwsjs::secondPassCompression(passBuff);
-        for(int i = 0; i != passBuff.bytes.size() - 1; ++i)
+        for(unsigned int i = 0; i != passBuff.bytes.size() - 1; ++i)
         {
             if(passBuff.bytes[i].stream)
                 std::cout<<passBuff.bytes[i].byte;
