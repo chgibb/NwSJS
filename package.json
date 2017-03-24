@@ -2,12 +2,16 @@
   "name": "nwsjs",
   "version": "0.1.0",
   "description": "",
-  "main": "",
+  "main": "index.js",
   "scripts": {
     "test": "bash test.bash"
   },
-  "author": "",
-  "license": "ISC",
+  "bin" : {
+    "nwsjslinux" : "./nwsjs",
+    "nwsjswin" : "./nwsjs.exe"
+  },
+  "author": "Chris Gibb",
+  "license": "",
   "dependencies": {},
   "devDependencies": {
     "@types/node": "^7.0.8",
