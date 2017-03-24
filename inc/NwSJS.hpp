@@ -220,7 +220,12 @@ namespace nwsjs
     {
         for(unsigned int i = 0; i != buff.bytes.size(); ++i)
         {
-            if((buff.bytes[i].byte == ';' || buff.bytes[i].byte == '\n') && buff.bytes[i + 1].byte == '\n')
+            if(
+                (buff.bytes[i].byte == ';' ||
+                buff.bytes[i].byte == '\n' ||
+                buff.bytes[i].byte == '{' ||
+                buff.bytes[i].byte == '}' ||
+                buff.bytes[i].byte == ',') && buff.bytes[i + 1].byte == '\n')
                 buff.bytes[i + 1].stream = false;
         }
     }
