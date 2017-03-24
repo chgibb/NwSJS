@@ -218,7 +218,7 @@ namespace nwsjs
 
     void secondPassCompression(StreamPassBuffer&buff)
     {
-        for(unsigned int i = 0; i != buff.bytes.size() - 1; ++i)
+        for(unsigned int i = 0; i != buff.bytes.size(); ++i)
         {
             if((buff.bytes[i].byte == ';' || buff.bytes[i].byte == '\n') && buff.bytes[i + 1].byte == '\n')
                 buff.bytes[i + 1].stream = false;

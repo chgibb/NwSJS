@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
         nwsjs::StreamPassBuffer passBuff;
         nwsjs::tokenizeAndCompress<decltype(passBuff)>(std::string(argv[1]),passBuff);
         nwsjs::secondPassCompression(passBuff);
-        for(unsigned int i = 0; i != passBuff.bytes.size() - 1; ++i)
+        for(unsigned int i = 0; i != passBuff.bytes.size(); ++i)
         {
             if(passBuff.bytes[i].stream)
                 std::cout<<passBuff.bytes[i].byte;
