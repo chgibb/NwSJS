@@ -42,6 +42,8 @@ do
     #get the file name of the output .js file
     artifact=$(echo $f | awk '{gsub("\\.ts",".js");print}')
 
+    chmod +x node_modules/.bin/browserify
+
     #use browserify to bundle the file and save it to bundleOutput.js
     ./node_modules/.bin/browserify $artifact --node --debug -o bundle$artifact
     if [ $? != 0 ]; then
