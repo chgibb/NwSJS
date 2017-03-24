@@ -1,14 +1,10 @@
 {
   "name": "nwsjs",
-  "version": "0.1.0",
+  "version": "0.1.6",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "bash test.bash"
-  },
-  "bin" : {
-    "nwsjslinux" : "./nwsjs",
-    "nwsjswin" : "./nwsjs.exe"
   },
   "author": "Chris Gibb",
   "license": "",

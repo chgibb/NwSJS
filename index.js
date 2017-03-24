@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var spawn = require("child_process");
 var args = process.argv;
 args.splice();
