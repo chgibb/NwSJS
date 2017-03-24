@@ -3,7 +3,7 @@ function compressAndPrint {
     #print its size
     printf "$1 original size: $(wc -c < $1)\n"
     #compress it
-    ./nwsjs $1 --comments --spaces --tabs > tmp
+    ./nwsjs $1 --comments --spaces --tabs --newLines > tmp
     if [ $? != 0 ]; then
         printf "NwsJS crashed trying to compress $1\n"
         exit 1
@@ -51,7 +51,7 @@ do
     #Print the file size of the bundle and then compress it
     printf "Compressing Browserify bundle\n"
     printf "bundle$artifact original size: $(wc -c < bundle$artifact)\n"
-    ./nwsjs bundle$artifact --comments --spaces --tabs > compBundle$artifact
+    ./nwsjs bundle$artifact --comments --spaces --tabs --newLines > compBundle$artifact
     #If we've failed to compress the bundle then it's likely to too complex and nwsjs has tripped on itself trying to compress it
     if [ $? != 0 ]; then
         exit 1
