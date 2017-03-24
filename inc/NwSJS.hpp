@@ -220,13 +220,31 @@ namespace nwsjs
     {
         for(unsigned int i = 0; i != buff.bytes.size(); ++i)
         {
-            if(
-                (buff.bytes[i].byte == ';' ||
-                buff.bytes[i].byte == '\n' ||
-                buff.bytes[i].byte == '{' ||
-                buff.bytes[i].byte == '}' ||
-                buff.bytes[i].byte == ',') && buff.bytes[i + 1].byte == '\n')
-                buff.bytes[i + 1].stream = false;
+            if(nwsjs::options::comments)
+            {
+                if(buff.bytes[i].byte == '/' && buff.bytes[i+1].byte == '/')
+                {
+                    buff.bytes[i].stream = false;
+                    buff.bytes[i + 1].stream = false;
+                    i++;
+                    i++;
+                    while(buff.bytes[i].byte != '\n' && i != buff.bytes.size())
+                    {
+                        buff.bytes[i].stream = false;
+                        i++;
+                    }
+                }
+            }
+            if(nwsjs::options::newLines)
+            {
+                if(
+                    (buff.bytes[i].byte == ';' ||
+                    buff.bytes[i].byte == '\n' ||
+                    buff.bytes[i].byte == '{' ||
+                    buff.bytes[i].byte == '}' ||
+                    buff.bytes[i].byte == ',') && buff.bytes[i + 1].byte == '\n')
+                    buff.bytes[i + 1].stream = false;
+            }
         }
     }
 }
