@@ -222,6 +222,9 @@ namespace nwsjs
         {
             if((buff.bytes[i].byte == ';' || buff.bytes[i].byte == '\n' || buff.bytes[i].byte == '{') && buff.bytes[i + 1].byte == '\n')
                 buff.bytes[i + 1].stream = false;
+
+            if((buff.bytes[i].byte == ' ') && buff.bytes[i + 1].byte == ' ')
+                buff.bytes[i + 1].stream = false;
         }
     }
 }
