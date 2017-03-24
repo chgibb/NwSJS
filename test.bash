@@ -42,6 +42,7 @@ do
     #get the file name of the output .js file
     artifact=$(echo $f | awk '{gsub("\\.ts",".js");print}')
 
+    #Executable bit on Browserify is getting clobbered by compression for some reason. Set it explicitly
     chmod +x node_modules/.bin/browserify
 
     #use browserify to bundle the file and save it to bundleOutput.js
