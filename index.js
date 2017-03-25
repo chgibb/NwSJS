@@ -1,13 +1,19 @@
 #!/usr/bin/env node
-var spawn = require("child_process");
-var args = process.argv;
+let spawn = require("child_process");
+let args = process.argv;
 args.splice();
 args.splice();
+let proc;
 if(process.platform == "linux")
 {
-    spawn.spawnSync("nwsjslinux",args);
+    proc = spawn.spawn("nwsjs",args);
 }
 if(process.platform == "win32")
 {
-    spawn.spawnSync("nwsjswin",args);
+    proc = spawn.spawn("nwsjs.exe",args);
 }
+
+proc.stdout.on('data',function(data){
+    console.log(data);
+});
+
