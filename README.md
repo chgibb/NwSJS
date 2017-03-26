@@ -7,13 +7,46 @@ Simple, lightweight, ES6 compliant cross-platform CLI utility to strip whitespac
 ### Running
 #### Linux
 ``` 
-$ ./nwsjs srcFile.js --comments --spaces --tabs > outFile.js
+$ ./nwsjs srcFile.js --comments --spaces --tabs --newLines > outFile.js
 ```
 #### Windows
 ``` 
-> nwsjs.exe srcFile.js --comments --spaces --tabs > outFile.js
+> nwsjs.exe srcFile.js --comments --spaces --tabs --newLines > outFile.js
 ```
 Note: srcFile.js and outFile.js must NOT be the same file!
+### Using From NPM
+### Installing
+#### Linux
+```
+$ npm install nwsjs
+```
+or
+```
+$ npm install -g nwsjs
+```
+#### Windows
+```
+> npm install --no-bin-links nwsjs
+```
+Note: Bin links for Windows do NOT work properly currently. Therefore, installing NwSJS globally on Windows is NOT supported. NwSJS will therefore be installed to  node_modules\nwsjs\nwsjs.exe on Windows.
+
+### Running
+#### Linux
+```
+$ ./node_modules/.bin/nwsjs
+```
+or
+```
+$ ./node_modules/nwsjs/nwsjs
+```
+or (if installed globally)
+```
+$ nwsjs
+```
+#### Windows
+```
+> node_modules\nwsjs\nwsjs
+```
 
 #### Options
 Strip comments from srcFile.js
@@ -29,6 +62,10 @@ Strip spaces from srcFile.js
 Strip tabs from srcFile.js
 ```
 --tabs
+```
+Strip new lines from srcFile.js
+```
+--newLines
 ```
 
 ### Building
