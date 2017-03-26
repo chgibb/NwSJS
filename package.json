@@ -1,14 +1,14 @@
 {
   "name": "nwsjs",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "bash test.bash"
   },
-  "bin" : {
-    "nwsjs" : "./nwsjs",
-    "nwsjs.exe" : "./nwsjs.exe"
+  "bin": {
+    "nwsjs": "./nwsjs",
+    "nwsjs.exe": "./nwsjs.exe"
   },
   "author": "Chris Gibb",
   "license": "MIT",
