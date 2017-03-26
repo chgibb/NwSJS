@@ -1,12 +1,12 @@
 {
   "name": "nwsjs",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "bash test.bash"
   },
-  "bin" : "./index.js",
+  "bin": "./index.js",
   "author": "Chris Gibb",
   "license": "MIT",
   "repository": {
