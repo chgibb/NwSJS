@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "bash test.bash",
-    "postinstall": "postinstall.js"
+    "postinstall": "node node_modules/nwsjs/postinstall.js"
   },
   "bin": {
     "nwsjs": "./nwsjs",
