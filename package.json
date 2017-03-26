@@ -6,6 +6,7 @@
   "scripts": {
     "test": "bash test.bash"
   },
+  "bin" : "./index.js",
   "author": "Chris Gibb",
   "license": "MIT",
   "repository": {
