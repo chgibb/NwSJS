@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "bash test.bash",
-    "postinstall": "postinstall.js"
+    "test": "bash test.bash"
   },
   "bin": {
     "nwsjs": "./nwsjs",
