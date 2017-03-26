@@ -13,10 +13,10 @@ $ ./nwsjs srcFile.js --comments --spaces --tabs --newLines > outFile.js
 ``` 
 > nwsjs.exe srcFile.js --comments --spaces --tabs --newLines > outFile.js
 ```
-Note: srcFile.js and outFile.js must NOT be the same file!
-### Using From NPM
-### Installing
-#### Linux
+Note: srcFile.js and outFile.js must NOT be the same file!  
+### Using From NPM  
+### Installing  
+#### Linux  
 ```
 $ npm install nwsjs
 ```
