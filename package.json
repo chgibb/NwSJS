@@ -1,11 +1,11 @@
 {
   "name": "nwsjs",
-  "version": "0.1.7",
+  "version": "0.1.10",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "bash test.bash"
-  },
+  },  
   "author": "Chris Gibb",
   "license": "",
   "dependencies": {},
