@@ -2,8 +2,8 @@ node_modules
 nwsjs
 test262
 log
-*.js
-*.log
+tests/*.js
+tests/*.log
 *.o
 *.exe
 nwsjs.exe
