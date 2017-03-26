@@ -1,0 +1,26 @@
+{
+  "name": "nwsjs",
+  "version": "0.1.16",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "bash test.bash"
+  },  
+  "author": "Chris Gibb",
+  "license": "MIT",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/chgibb/nwsjs.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^7.0.8",
+    "angular": "^1.6.3",
+    "browserify": "^14.1.0",
+    "fs-extra": "^2.1.2",
+    "jquery": "^3.2.1",
+    "minimist": "^1.2.0",
+    "rimraf": "^2.6.1",
+    "typescript": "^2.2.1"
+  }
+}
