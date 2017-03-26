@@ -1,2 +1,2 @@
 let fs = require("fs");
-fs.unlinkSync("node_modules/.bin/nwsjs.exe");
+fs.unlinkSync(".../.bin/nwsjs.exe");
