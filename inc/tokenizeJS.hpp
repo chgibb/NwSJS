@@ -13,7 +13,7 @@ namespace nwsjs
         token == "async" || token == "yield" || token == "break" || token == "continue" ||
         token == "case" || token == "void")
             return token + " ";
-        else if(token == "in" || token == "instanceof")
+        else if(token == "in" || token == "instanceof" || token == "extends")
             return " "+token+" ";
         return token;
     }
@@ -47,6 +47,7 @@ namespace nwsjs
         bool add = true;
         if(file.fail())
 		    return false;
+        int i = 1;
         while(file.get(byte))
         {
             add = true;
@@ -56,15 +57,22 @@ namespace nwsjs
                     if(parseOptions&nwsjs::options::comments)
                     {
                         file.get(byte);
+                        if(!byte)
+                            return true;
                         //single line
                         if(byte == '/')
                         {
+                            i = 1;
                             //consume the line
                             for(;;)
                             {
+                                std::cerr<<"trying to consume single line comment \""<<byte<<"\""<<i<<"\n";
                                 if(byte == '\n')
                                     break;
                                 file.get(byte);
+                                if(!byte)
+                                    return true;    
+                                ++i;
                             }
                             stream<<"\n";
                             break;
@@ -72,14 +80,20 @@ namespace nwsjs
                         //multi line
                         else if(byte == '*')
                         {
+                            i = 1;
                             for(;;)
                             {
+                                std::cerr<<"trying to consume multi line comment \""<<byte<<"\""<<i<<"\n";
                                 file.get(byte);
                                 if(lastByte == '*' && byte == '/')
                                 {
+                                    
                                     file.get(byte);
+                                    if(!byte)
+                                        return true;    
                                     break;
                                 }
+                                ++i;
                                 lastByte = byte;
                             }
                             break;
@@ -93,40 +107,60 @@ namespace nwsjs
                                 if(byte == '\n')
                                     break;
                                 file.get(byte);
+                                if(!byte)
+                                    return true;    
                             }
                         }
                     }
                 break;
                 case '\"':
                     str += byte;
+                    i = 1;
                     for(;;)
                     {
+                        std::cerr<<"trying to consume double quoted string \""<<byte<<"\""<<i<<"\n";
                         file.get(byte);
+                        if(!byte)
+                            return true;    
                         str += byte;
                         if(byte == '\"' && lastByte != '\\')
                             break;
                         lastByte = byte;
+                        ++i;
                     }
                 break;
                 case '\'':
                     str += byte;
+                    i = 1;
                     for(;;)
                     {
+                        std::cerr<<"trying to consume single quoted string \""<<byte<<"\""<<i<<"\n";
                         file.get(byte);
+                        if(!byte)
+                            return true;    
                         str += byte;
                         if(byte == '\'' && lastByte != '\\')
                             break;
                         lastByte = byte;
+                        i++;
                     }
                 break;
                 case '`':
                     str += byte;
+                    i = 1;
                     for(;;)
                     {
+                        std::cerr<<"trying to consume backtick quoted string \""<<byte<<"\""<<i<<"\n";
                         file.get(byte);
+                        if(!byte || !file)
+                        {
+                            stream<<str;
+                            return true;
+                        }
                         str += byte;
                         if(byte == '`')
                             break;
+                        ++i;
                     }
                     continue;
                 break;
