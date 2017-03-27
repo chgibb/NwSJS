@@ -1,12 +1,8 @@
-/*
-    Extremely simple, lightweight CLI utility to strip whitespace and comments from Javascript source code.
-	Approximately 75x faster, with 25% less CPU usage than UglifyJS at the same task. Tends to choke on files > 500kb however.
-*/
 #include <iostream>
 #include <string>
 #include <vector>
 #include <fstream>
-#include "inc/tokenizeJS.hpp"
+#include "inc/NwSJS.hpp"
 using namespace std;
 int main(int argc, char* argv[])
 {
@@ -20,22 +16,35 @@ int main(int argc, char* argv[])
     {
         args.push_back(argv[i]);
     }
-    int parseOptions = 0;
     for(auto it = args.begin(); it != args.end(); ++it)
     {
         if(*it == "--comments")
-            parseOptions |= nwsjs::options::comments;
+            nwsjs::options::comments = true;
         if(*it == "--spaces")
-            parseOptions |= nwsjs::options::spaces;
+            nwsjs::options::spaces = true;
         if(*it == "--tabs")
-            parseOptions |= nwsjs::options::tabs;
-        if(*it == "--tokensToStdErr")
-            parseOptions |= nwsjs::options::tokensToStdErr;
+            nwsjs::options::tabs = true;
+        if(*it == "--newLines")
+            nwsjs::options::newLines = true;
     }
-    if(!nwsjs::tokenizeJS<decltype(std::cout)>(std::string(argv[1]),parseOptions,std::cout))
+    if(!nwsjs::options::newLines)
     {
-        std::cout<<"Could not open "<<argv[1]<<"\n";
-        return 1;
+        if(!nwsjs::tokenizeAndCompress<decltype(std::cout)>(std::string(argv[1]),std::cout))
+        {
+            std::cout<<"Could not open "<<argv[1]<<"\n";
+            return 1;
+        }
+    }
+    else if(nwsjs::options::newLines)
+    {
+        nwsjs::StreamPassBuffer passBuff;
+        nwsjs::tokenizeAndCompress<decltype(passBuff)>(std::string(argv[1]),passBuff);
+        nwsjs::secondPassCompression(passBuff);
+        for(unsigned int i = 0; i != passBuff.bytes.size(); ++i)
+        {
+            if(passBuff.bytes[i].stream)
+                std::cout<<passBuff.bytes[i].byte;
+        }
     }
     return 0;
 }

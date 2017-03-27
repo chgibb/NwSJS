@@ -23,10 +23,11 @@ namespace nwsjs
     }
     namespace options
     {
-        int comments = 0x01;
-        int spaces = 0x02;
-        int tabs = 0x04;
-        int tokensToStdErr = 0x08;
+        bool comments = false;
+        bool spaces = false;
+        bool tabs = false;
+        bool newLines = false;
+
     }
     std::vector<char> delimTokens{
         '(',')',
@@ -38,7 +39,7 @@ namespace nwsjs
     auto delimTokensEnd = delimTokens.end();
 
     template<class T>
-    bool tokenizeJS(std::string filename,int&parseOptions,T&stream)
+    bool tokenizeAndCompress(std::string filename,T&stream)
     {
         std::ifstream file(filename.c_str(),std::ios::in);
         char byte;
@@ -54,7 +55,7 @@ namespace nwsjs
             switch(byte)
             {
                 case '/':
-                    if(parseOptions&nwsjs::options::comments)
+                    if(nwsjs::options::comments)
                     {
                         file.get(byte);
                         if(!byte)
@@ -181,7 +182,7 @@ namespace nwsjs
             {
                 if(byte == ' ')
                 {
-                    if((parseOptions&nwsjs::options::spaces) == 0)
+                    if((nwsjs::options::spaces) == 0)
                         str += " ";
                     if(str != "")
                         stream<<nwsjs::addWhiteSpaceToToken(str);
@@ -191,7 +192,7 @@ namespace nwsjs
                 }
                 if(byte == '\t')
                 {
-                    if((parseOptions&nwsjs::options::tabs) == 0)
+                    if((nwsjs::options::tabs) == 0)
                         str += "\t";
                     if(str != "")
                         stream<<nwsjs::addWhiteSpaceToToken(str);
@@ -216,5 +217,48 @@ namespace nwsjs
         }
 	    file.close();
         return true;
+    }
+    struct StreamByteBuffer
+    {
+        char byte;
+        bool stream;
+    };
+    class StreamPassBuffer
+    {
+        public:
+            StreamPassBuffer() = default;
+            ~StreamPassBuffer() = default;
+            std::vector<StreamByteBuffer> bytes;
+    };
+    StreamPassBuffer&operator<<(StreamPassBuffer&buff,std::string str)
+    {
+        for(unsigned int i = 0; i != str.length(); ++i)
+        {
+            struct StreamByteBuffer byteBuff;
+            byteBuff.byte = str[i];
+            byteBuff.stream = true;
+            buff.bytes.push_back(byteBuff);
+        }
+        return buff;
+    }
+    StreamPassBuffer&operator<<(StreamPassBuffer&buff,char&byte)
+    {
+        struct StreamByteBuffer byteBuff;
+        byteBuff.byte = byte;
+        byteBuff.stream = true;
+        buff.bytes.push_back(byteBuff);
+        return buff;
+    }
+
+    void secondPassCompression(StreamPassBuffer&buff)
+    {
+        for(unsigned int i = 0; i != buff.bytes.size(); ++i)
+        {
+            if((buff.bytes[i].byte == ';' || buff.bytes[i].byte == '\n' || buff.bytes[i].byte == '{') && buff.bytes[i + 1].byte == '\n')
+                buff.bytes[i + 1].stream = false;
+
+            if((buff.bytes[i].byte == ' ') && buff.bytes[i + 1].byte == ' ')
+                buff.bytes[i + 1].stream = false;
+        }
     }
 }

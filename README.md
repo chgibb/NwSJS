@@ -1,16 +1,52 @@
 # NwSJS
 ## No White Space JavaScript
 
-Simple, lightweight, cross-platform CLI utility to strip whitespace and comments from Javascript source code.
-Approximately 75x faster, with 25% less CPU usage than UglifyJS at the same task.
-Currently tends to choke on files > 500kb.
+Simple, lightweight, ES6 compliant cross-platform CLI utility to strip whitespace and comments from Javascript source code.
 
 ## Usage
 ### Running
+#### Linux
 ``` 
-./nwsjs srcFile.js --comments --spaces --tabs > outFile.js
+$ ./nwsjs srcFile.js --comments --spaces --tabs --newLines > outFile.js
 ```
-Note: srcFile.js and outFile.js must NOT be the same file!
+#### Windows
+``` 
+> nwsjs.exe srcFile.js --comments --spaces --tabs --newLines > outFile.js
+```
+Note: srcFile.js and outFile.js must NOT be the same file!  
+### Using From NPM  
+### Installing  
+#### Linux  
+```
+$ npm install nwsjs
+```
+or
+```
+$ npm install -g nwsjs
+```
+#### Windows
+```
+> npm install --no-bin-links nwsjs
+```
+Note: Bin links for Windows do NOT work properly currently. Therefore, installing NwSJS globally on Windows is NOT supported. NwSJS will therefore be installed to  node_modules\nwsjs\nwsjs.exe on Windows.
+
+### Running
+#### Linux
+```
+$ ./node_modules/.bin/nwsjs
+```
+or
+```
+$ ./node_modules/nwsjs/nwsjs
+```
+or (if installed globally)
+```
+$ nwsjs
+```
+#### Windows
+```
+> node_modules\nwsjs\nwsjs
+```
 
 #### Options
 Strip comments from srcFile.js
@@ -27,38 +63,37 @@ Strip tabs from srcFile.js
 ```
 --tabs
 ```
+Strip new lines from srcFile.js
+```
+--newLines
+```
 
 ### Building
+#### Linux
 ```
-bash build.bash
+$ bash build.bash
 ```
+#### Windows
+```
+> build
+```
+Note: Building requires that ```g++``` be available on your ```PATH``` for both Linux and Windows.
 
-### Testing
-NwSJS is tested against Ecma International, Technical Committee 39's test suite. See https://github.com/tc39/test262 for more information. Tests are run using test262-node-harness
-
-Clone test262 repo.
-```
-bash refreshTests.bash
-```
-
-Download test262-node-harness (through npm. Declared in package.json).
-See https://github.com/bterlson/test262-harness for more information.
+## Testing
+Download dependencies for testing
 ```
 npm install
 ```
 
-Run NwSJS on the test files.
+Run test suite
 ```
-bash compressTests.bash
+npm test
 ```
+Note: For Windows users, running tests requires the availability of a valid ```bash.exe``` on your ```%PATH%```.
 
-Run the test harness on the compressed test files.
-```
-bash run.bash > log
-```
+### Testing Process
+NwSJS is tested against Microsoft's Typescript compiler and the Browserify Javascript bundler. The version of tsc downloaded by running ```npm install``` is itself compressed with NwSJS before being used to compile each .ts file. If NwSJS crashes or the compiler raises an error while compiling then the test fails.  
 
-Get total number of errors caused by NwSJS
-```
-grep SyntaxError: log | wc -l
-```
-Output should (hopefuly) be 0.
+Each compiled .ts file is then bundled using Browserify. The resulting bundles are then compressed. The compressed and uncompressed bundles are run and their return codes are compared. If the return codes differ, then the test fails.
+
+Note: See ```test.bash``` for full process and more notes.
