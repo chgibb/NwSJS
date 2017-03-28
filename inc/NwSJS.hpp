@@ -51,3 +51,4 @@ namespace nwsjs
         }
     }
 }
+#include "lexAndCompress.hpp"
