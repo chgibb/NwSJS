@@ -27,6 +27,13 @@ int main(int argc, char* argv[])
         if(*it == "--newLines")
             nwsjs::options::newLines = true;
     }
+    nwsjs::StreamPassBuffer buff;
+    bool res = nwsjs::bufferFile(argv[1],buff);
+    if(!res)
+    {
+        std::cerr<<"Could not open "<<argv[1]<<std::endl;
+    }
+    buff.print(std::cout);
     /*if(!nwsjs::options::newLines)
     {
         if(!nwsjs::tokenizeAndCompress<decltype(std::cout)>(std::string(argv[1]),std::cout))
