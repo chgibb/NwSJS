@@ -14,6 +14,15 @@ namespace nwsjs
             StreamPassBuffer() = default;
             ~StreamPassBuffer() = default;
             std::vector<StreamByteBuffer> bytes;
+            template<class T>
+            void print(T&stream)
+            {
+                for(unsigned int i = 0; i != this->bytes.size(); ++i)
+                {
+                    if(this->bytes[i].stream)
+                        stream<<this->bytes[i].byte;
+                }
+            }
     };
     StreamPassBuffer&operator<<(StreamPassBuffer&buff,std::string str)
     {
