@@ -121,6 +121,11 @@ namespace nwsjs
                     {
                         //std::cerr<<"trying to consume double quoted string \""<<byte<<"\""<<i<<"\n";
                         file.get(byte);
+                        if(!byte || !file)
+                        {
+                            stream<<str;
+                            return true;
+                        }
                         if(!byte)
                             return true;    
                         str += byte;
@@ -137,6 +142,11 @@ namespace nwsjs
                     {
                         //std::cerr<<"trying to consume single quoted string \""<<byte<<"\""<<i<<"\n";
                         file.get(byte);
+                        if(!byte || !file)
+                        {
+                            stream<<str;
+                            return true;
+                        }
                         if(!byte)
                             return true;    
                         str += byte;
