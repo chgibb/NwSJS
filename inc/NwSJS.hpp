@@ -67,7 +67,7 @@ namespace nwsjs
                             //consume the line
                             for(;;)
                             {
-                                std::cerr<<"trying to consume single line comment \""<<byte<<"\""<<i<<"\n";
+                                //std::cerr<<"trying to consume single line comment \""<<byte<<"\""<<i<<"\n";
                                 if(byte == '\n')
                                     break;
                                 file.get(byte);
@@ -84,7 +84,7 @@ namespace nwsjs
                             i = 1;
                             for(;;)
                             {
-                                std::cerr<<"trying to consume multi line comment \""<<byte<<"\""<<i<<"\n";
+                                //std::cerr<<"trying to consume multi line comment \""<<byte<<"\""<<i<<"\n";
                                 file.get(byte);
                                 if(lastByte == '*' && byte == '/')
                                 {
@@ -119,7 +119,7 @@ namespace nwsjs
                     i = 1;
                     for(;;)
                     {
-                        std::cerr<<"trying to consume double quoted string \""<<byte<<"\""<<i<<"\n";
+                        //std::cerr<<"trying to consume double quoted string \""<<byte<<"\""<<i<<"\n";
                         file.get(byte);
                         if(!byte)
                             return true;    
@@ -135,7 +135,7 @@ namespace nwsjs
                     i = 1;
                     for(;;)
                     {
-                        std::cerr<<"trying to consume single quoted string \""<<byte<<"\""<<i<<"\n";
+                        //std::cerr<<"trying to consume single quoted string \""<<byte<<"\""<<i<<"\n";
                         file.get(byte);
                         if(!byte)
                             return true;    
@@ -151,7 +151,7 @@ namespace nwsjs
                     i = 1;
                     for(;;)
                     {
-                        std::cerr<<"trying to consume backtick quoted string \""<<byte<<"\""<<i<<"\n";
+                        //std::cerr<<"trying to consume backtick quoted string \""<<byte<<"\""<<i<<"\n";
                         file.get(byte);
                         if(!byte || !file)
                         {
