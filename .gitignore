@@ -8,3 +8,4 @@ tests/*.log
 *.exe
 nwsjs.exe
 main.o
+.vscode
