@@ -1,13 +1,39 @@
 #pragma once
 #include <string>
+#include "ignoreWrappedSequence.hpp"
 namespace nwsjs
 {
     void lexAndCompress(nwsjs::StreamPassBuffer&buff)
     {
-        auto&end = buff.bytes.size();
+        size_t end = buff.bytes.size();
         for(unsigned int i = 0; i != end; ++i)
         {
-            
+            nwsjs::ignoreWrappedSequence(buff,i,end,'\"');
+            nwsjs::ignoreWrappedSequence(buff,i,end,'\'');
+            nwsjs::ignoreWrappedSequence(buff,i,end,'`');
+            if(buff.bytes[i].byte == '/')
+            {
+                if(nwsjs::options::comments)
+                {
+                    i++;
+                    if(i == end)
+                        return;
+                    if(buff.bytes[i].byte == '/')
+                    {
+                        buff.bytes[i-1].stream = false;
+                        while(i != end)
+                        {
+                            if(buff.bytes[i].byte == '\n')
+                            {
+                                buff.bytes[i].stream = false;
+                                break;
+                            }
+                            buff.bytes[i].stream = false;
+                            i++;
+                        }
+                    }
+                }
+            }
         }
     }
     template<class T>
@@ -217,3 +243,4 @@ namespace nwsjs
 	    file.close();
         return true;
     }
+}
