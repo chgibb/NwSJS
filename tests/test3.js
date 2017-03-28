@@ -6,3 +6,14 @@ inc ++
 if(inc != 2)
     process.exit(1);
 console.log("Increments work!");
+
+for(var i = 0; i != 1; ++ i)
+{
+    for(var k = 0; k != 2; k ++ )
+    {
+        inc ++
+    }
+}
+if(inc != 4)
+    process.exit(1);
+console.log("Loop increments work!");
