@@ -2,6 +2,14 @@
 #include <string>
 namespace nwsjs
 {
+    void lexAndCompress(nwsjs::StreamPassBuffer&buff)
+    {
+        auto&end = buff.bytes.size();
+        for(unsigned int i = 0; i != end; ++i)
+        {
+            
+        }
+    }
     template<class T>
     bool tokenizeAndCompress(std::string filename,T&stream)
     {
