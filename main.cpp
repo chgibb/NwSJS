@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
         if(*it == "--newLines")
             nwsjs::options::newLines = true;
     }
-    if(!nwsjs::options::newLines)
+    /*if(!nwsjs::options::newLines)
     {
         if(!nwsjs::tokenizeAndCompress<decltype(std::cout)>(std::string(argv[1]),std::cout))
         {
@@ -45,6 +45,6 @@ int main(int argc, char* argv[])
             if(passBuff.bytes[i].stream)
                 std::cout<<passBuff.bytes[i].byte;
         }
-    }
+    }*/
     return 0;
 }
