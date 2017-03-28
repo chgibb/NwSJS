@@ -20,10 +20,7 @@ namespace nwsjs
             return " "+token+" ";
         return token;
     }
-    void stripChar(std::string&str,char&c)
-    {
-        str.erase(std::remove(str.begin(),str.end(),c),str.end());
-    }
+
     namespace options
     {
         bool comments = false;
