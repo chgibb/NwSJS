@@ -20,7 +20,6 @@ namespace nwsjs
                 {
                     if(buff.bytes[i].byte == '\n')
                     {
-                        buff.bytes[i].stream = false;
                         break;
                     }
                     buff.bytes[i].stream = false;
