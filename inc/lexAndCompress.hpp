@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "ignoreWrappedSequence.hpp"
+#include "ignoreRegexLiteral.hpp"
 namespace nwsjs
 {
     void stripComments(nwsjs::StreamPassBuffer&buff)
@@ -8,6 +9,7 @@ namespace nwsjs
         size_t end = buff.bytes.size();
         for(unsigned int i = 0; i != end; ++i)
         {
+            nwsjs::ignoreRegexLiteral(buff,i,end);
             if(buff.bytes[i].byte == '/' && buff.bytes[i+1].byte == '/')
             {
                 buff.bytes[i].stream = false;
