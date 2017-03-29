@@ -17,7 +17,10 @@ namespace nwsjs
             {
                 str += buff.bytes[i].byte;
                 if(buff.bytes[i].byte == ignore && buff.bytes[i].byte != '\\')
+                {
+                    i++;
                     return str;
+                }
                 i++;
             }
         }

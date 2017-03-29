@@ -29,7 +29,8 @@ int main(int argc, char* argv[])
     }
     nwsjs::StreamPassBuffer buff;
     bool res = nwsjs::bufferFile(argv[1],buff);
-    nwsjs::lexAndCompress(buff);
+    if(nwsjs::options::comments)
+        nwsjs::stripComments(buff);
     if(!res)
     {
         std::cerr<<"Could not open "<<argv[1]<<std::endl;
