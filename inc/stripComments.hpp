@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "StreamBuffer.hpp"
 #include "ignoreWrappedSequence.hpp"
 #include "ignoreRegexLiteral.hpp"
 namespace nwsjs

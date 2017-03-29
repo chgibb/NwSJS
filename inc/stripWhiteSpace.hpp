@@ -12,7 +12,23 @@ namespace nwsjs
         {
             if(buff.bytes[i].stream)
             {
-                
+                for(auto it = delimTokens.begin(); it != delimTokensEnd; ++it)
+                {
+                    if(buff.bytes[i].byte == *it)
+                    {
+                        if(buff.bytes[i+1].stream)
+                        {
+                            if(options::spaces)
+                            {
+                                if(buff.bytes[i+1].byte == ' ')
+                                {
+                                    buff.bytes[i+1].stream = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

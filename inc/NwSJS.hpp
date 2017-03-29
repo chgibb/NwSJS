@@ -51,5 +51,5 @@ namespace nwsjs
         }
     }
 }
-#include "lexAndCompress.hpp"
-#include "removeWhiteSpace.hpp"
+#include "stripComments.hpp"
+#include "stripWhiteSpace.hpp"

@@ -31,6 +31,7 @@ int main(int argc, char* argv[])
     bool res = nwsjs::bufferFile(argv[1],buff);
     if(nwsjs::options::comments)
         nwsjs::stripComments(buff);
+    //nwsjs::stripWhiteSpace(buff);
     if(!res)
     {
         std::cerr<<"Could not open "<<argv[1]<<std::endl;
