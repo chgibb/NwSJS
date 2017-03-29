@@ -30,6 +30,14 @@ namespace nwsjs
                                     break;
                                 }
                             }
+                            if(options::tabs)
+                            {
+                                if(buff.bytes[i+1].byte == '\t')
+                                {
+                                    buff.bytes[i+1].stream = false;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
