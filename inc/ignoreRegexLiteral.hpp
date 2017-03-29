@@ -9,7 +9,7 @@ namespace nwsjs
         size_t end
     )
     {
-        if(buff.bytes[i].byte == '/' && buff.bytes[i+1] != '/')
+        if(buff.bytes[i].byte == '/' && buff.bytes[i+1].byte != '/')
         {
             while(i != end)
             {
