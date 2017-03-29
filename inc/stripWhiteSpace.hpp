@@ -12,6 +12,10 @@ namespace nwsjs
         {
             if(buff.bytes[i].stream)
             {
+                nwsjs::ignoreRegexLiteral(buff,i,end);
+                nwsjs::ignoreWrappedSequence(buff,i,end,'\"');
+                nwsjs::ignoreWrappedSequence(buff,i,end,'\'');
+                nwsjs::ignoreWrappedSequence(buff,i,end,'`');
                 for(auto it = delimTokens.begin(); it != delimTokensEnd; ++it)
                 {
                     if(buff.bytes[i].byte == *it)
