@@ -25,6 +25,26 @@ namespace nwsjs
                     i++;
                 }
             }
+            if(buff.bytes[i].byte == '/' && buff.bytes[i+1].byte == '*')
+            {
+                buff.bytes[i].stream = false;
+                buff.bytes[i+1].stream = false;
+                i++;
+                i++;
+                while(i != end)
+                {
+                    if(buff.bytes[i].byte == '*' && buff.bytes[i+1].byte == '/')
+                    {
+                        buff.bytes[i].stream = false;
+                        buff.bytes[i+1].stream = false;
+                        i++;
+                        i++;
+                        break;
+                    }
+                    buff.bytes[i].stream = false;
+                    i++;
+                }
+            }
             nwsjs::ignoreWrappedSequence(buff,i,end,'\"');
             nwsjs::ignoreWrappedSequence(buff,i,end,'\'');
             nwsjs::ignoreWrappedSequence(buff,i,end,'`');
