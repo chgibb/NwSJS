@@ -10,7 +10,6 @@ namespace nwsjs
         size_t end = buff.bytes.size();
         for(unsigned int i = 0; i != end; ++i)
         {
-            nwsjs::ignoreRegexLiteral(buff,i,end);
             if(buff.bytes[i].byte == '/' && buff.bytes[i+1].byte == '/')
             {
                 buff.bytes[i].stream = false;
@@ -47,6 +46,7 @@ namespace nwsjs
                     i++;
                 }
             }
+            nwsjs::ignoreRegexLiteral(buff,i,end);
             nwsjs::ignoreWrappedSequence(buff,i,end,'\"');
             nwsjs::ignoreWrappedSequence(buff,i,end,'\'');
             nwsjs::ignoreWrappedSequence(buff,i,end,'`');
