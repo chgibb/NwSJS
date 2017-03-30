@@ -1,15 +1,12 @@
 # NwSJS
 
 ## No White Space JavaScript
+Simple, lightweight, ES6 compliant, cross-platform CLI utility to strip whitespace and comments from Javascript source code.  
+
 [![Build status](https://ci.appveyor.com/api/projects/status/j59s8ni4iimacqkt?svg=true)](https://ci.appveyor.com/project/chgibb/nwsjs)
 [![Build Status](https://travis-ci.org/chgibb/NwSJS.svg?branch=master)](https://travis-ci.org/chgibb/NwSJS)
 
-NPM  
-[![npm](https://img.shields.io/npm/dt/nwsjs.svg)]()  
-GitHub  
-[![Github All Releases](https://img.shields.io/github/downloads/chgibb/nwsjs/total.svg)]()
-
-Simple, lightweight, ES6 compliant, cross-platform CLI utility to strip whitespace and comments from Javascript source code.
+[![NPM](https://nodei.co/npm/nwsjs.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/nwsjs/)
 
 ## Usage
 ### Running
@@ -22,9 +19,9 @@ $ ./nwsjs srcFile.js > outFile.js
 > nwsjs.exe srcFile.js > outFile.js
 ```
 Note: srcFile.js and outFile.js must NOT be the same file!  
-### Using From NPM  
-### Installing  
-#### Linux  
+### Using From NPM
+### Installing
+#### Linux
 ```
 $ npm install nwsjs
 ```
