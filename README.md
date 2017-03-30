@@ -7,11 +7,11 @@ Simple, lightweight, ES6 compliant cross-platform CLI utility to strip whitespac
 ### Running
 #### Linux
 ``` 
-$ ./nwsjs srcFile.js --comments --spaces --tabs --newLines > outFile.js
+$ ./nwsjs srcFile.js > outFile.js
 ```
 #### Windows
 ``` 
-> nwsjs.exe srcFile.js --comments --spaces --tabs --newLines > outFile.js
+> nwsjs.exe srcFile.js > outFile.js
 ```
 Note: srcFile.js and outFile.js must NOT be the same file!  
 ### Using From NPM  
@@ -48,26 +48,6 @@ $ nwsjs
 > node_modules\nwsjs\nwsjs
 ```
 
-#### Options
-Strip comments from srcFile.js
-```
---comments
-```
-
-Strip spaces from srcFile.js
-```
---spaces
-```
-
-Strip tabs from srcFile.js
-```
---tabs
-```
-Strip new lines from srcFile.js
-```
---newLines
-```
-
 ### Building
 #### Linux
 ```
@@ -92,7 +72,7 @@ npm test
 Note: For Windows users, running tests requires the availability of a valid ```bash.exe``` on your ```%PATH%```.
 
 ### Testing Process
-NwSJS is tested against Microsoft's Typescript compiler and the Browserify Javascript bundler. The version of tsc downloaded by running ```npm install``` is itself compressed with NwSJS before being used to compile each .ts file. If NwSJS crashes or the compiler raises an error while compiling then the test fails.  
+NwSJS is tested against Microsoft's Typescript compiler and the Browserify Javascript bundler. Every .js file pulled in by Typescript, Browserify, as well as the various front end and backend frameworks pulled in by the test files are first compressed. The .ts files under tests are then compiled. If NwSJS crashes or the compiler raises an error while compiling then the test fails.  
 
 Each compiled .ts file is then bundled using Browserify. The resulting bundles are then compressed. The compressed and uncompressed bundles are run and their return codes are compared. If the return codes differ, then the test fails.
 
