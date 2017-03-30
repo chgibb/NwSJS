@@ -16,7 +16,7 @@ namespace nwsjs
                 nwsjs::ignoreWrappedSequence(buff,i,end,'\"');
                 nwsjs::ignoreWrappedSequence(buff,i,end,'\'');
                 nwsjs::ignoreWrappedSequence(buff,i,end,'`');
-                if((buff.bytes[i].byte == ';' || buff.bytes[i].byte == '\n' || buff.bytes[i].byte == '{') && buff.bytes[i + 1].byte == '\n')
+                if((buff.bytes[i].byte == ';' || buff.bytes[i].byte == ',' || buff.bytes[i].byte == '\n' || buff.bytes[i].byte == '{') && buff.bytes[i + 1].byte == '\n')
                     buff.bytes[i + 1].stream = false;
             }
         }
