@@ -7,10 +7,11 @@ namespace nwsjs
 {
     void stripComments(nwsjs::StreamPassBuffer&buff)
     {
-        size_t end = buff.bytes.size();
-        for(unsigned int i = 0; i != end; ++i)
+        size_t end = buff.bytes.size() - 1;
+        for(unsigned int i = 0; i < end; ++i)
         {
-            if(buff.bytes[i].byte == '/' && buff.bytes[i+1].byte == '/')
+            if(buff.bytes[i].byte == '/' &&
+             buff.bytes[i+1].byte == '/')
             {
                 buff.bytes[i].stream = false;
                 buff.bytes[i+1].stream = false;

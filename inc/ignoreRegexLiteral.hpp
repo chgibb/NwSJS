@@ -11,7 +11,7 @@ namespace nwsjs
     {
         if(buff.bytes[i].byte == '/' && buff.bytes[i+1].byte != '/')
         {
-            while(i != end)
+            while(i < end)
             {
                 i++;
                 if(buff.bytes[i].byte == '\n')

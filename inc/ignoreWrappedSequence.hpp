@@ -14,7 +14,7 @@ namespace nwsjs
         {
             std::string str = "";
             str += ignore;
-            while(i != end)
+            while(i < end)
             {
                 i++;
                 str += buff.bytes[i].byte;

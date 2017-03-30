@@ -53,3 +53,4 @@ namespace nwsjs
 }
 #include "stripComments.hpp"
 #include "stripWhiteSpace.hpp"
+#include "stripNewLines.hpp"
