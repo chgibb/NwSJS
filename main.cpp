@@ -37,11 +37,16 @@ int main(int argc, char* argv[])
     {
         return 0;
     }
-    if(nwsjs::options::comments)
+    /*if(nwsjs::options::comments)
         nwsjs::stripComments(buff);
     nwsjs::stripWhiteSpace(buff);
     if(nwsjs::options::newLines)
-        nwsjs::stripNewLines(buff);
+        nwsjs::stripNewLines(buff);*/
+    buff = nwsjs::stripNewLines(
+        nwsjs::stripWhiteSpace(
+            nwsjs::stripComments(buff)
+        )
+    );
     buff.print(std::cout);
     return 0;
 }

@@ -5,7 +5,7 @@
 #include "ignoreRegexLiteral.hpp"
 namespace nwsjs
 {
-    void stripWhiteSpace(nwsjs::StreamPassBuffer&buff)
+    nwsjs::StreamPassBuffer stripWhiteSpace(nwsjs::StreamPassBuffer buff)
     {
         size_t end = buff.bytes.size();
         for(unsigned int i = 0; i < end; ++i)
@@ -48,5 +48,8 @@ namespace nwsjs
                     buff.bytes[i + 1].stream = false;
                 
         }
+        nwsjs::StreamPassBuffer res;
+        buff.print(res);
+        return res;
     }
 }
