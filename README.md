@@ -19,7 +19,7 @@ $ ./nwsjs srcFile.js > outFile.js
 > nwsjs.exe srcFile.js > outFile.js
 ```
 Note: srcFile.js and outFile.js must NOT be the same file!  
-### Using From NPM
+### Using From NPM  
 ### Installing
 #### Linux
 ```
