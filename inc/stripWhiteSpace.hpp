@@ -24,11 +24,8 @@ namespace nwsjs
                     buff.bytes[i].byte == '\n' ||
                     buff.bytes[i].byte == '{')
                     {
-                        if(i + 1 < end)
-                        {
-                            if(buff.bytes[i + 1].byte == ' ')
-                                buff.bytes[i + 1].stream = false;
-                        }
+                        if(buff.bytes[i + 1].byte == ' ')
+                            buff.bytes[i + 1].stream = false;   
                     }
                 if(buff.bytes[i].byte == ' ' && buff.bytes[i + 1].byte == '=')
                     buff.bytes[i].stream = false;
