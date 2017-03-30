@@ -30,6 +30,11 @@ namespace nwsjs
                                 buff.bytes[i + 1].stream = false;
                         }
                     }
+                if(buff.bytes[i].byte == ' ' && buff.bytes[i + 1].byte == '=')
+                    buff.bytes[i].stream = false;
+                if(buff.bytes[i].byte == '=' && buff.bytes[i + 1].byte == ' ')
+                    buff.bytes[i + 1].stream = false;
+                
         }
     }
 }
