@@ -17,6 +17,16 @@ namespace nwsjs
                 if(buff.bytes[i].byte == '\t')
                     buff.bytes[i].stream = false;
                 
+        }
+        for(unsigned int i = 0; i < end; ++i)
+        {
+                nwsjs::ignoreRegexLiteral(buff,i,end);
+                nwsjs::ignoreWrappedSequence(buff,i,end,'\"');
+                nwsjs::ignoreWrappedSequence(buff,i,end,'\'');
+                nwsjs::ignoreWrappedSequence(buff,i,end,'`');
+                if(buff.bytes[i].byte == '\t')
+                    buff.bytes[i].stream = false;
+                
                 if(buff.bytes[i].byte == ';' ||
                     buff.bytes[i].byte == ':' ||
                     buff.bytes[i].byte == ',' ||
@@ -27,6 +37,11 @@ namespace nwsjs
                         if(buff.bytes[i + 1].byte == ' ')
                             buff.bytes[i + 1].stream = false;   
                     }
+                
+                if(buff.bytes[i].byte == ' ' && buff.bytes[i + 1].byte == '(')
+                    buff.bytes[i].stream = false;
+
+                
                 if(buff.bytes[i].byte == ' ' && buff.bytes[i + 1].byte == '=')
                     buff.bytes[i].stream = false;
                 if(buff.bytes[i].byte == '=' && buff.bytes[i + 1].byte == ' ')
