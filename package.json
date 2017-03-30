@@ -1,7 +1,7 @@
 {
   "name": "nwsjs",
   "version": "0.2.0",
-  "description": "",
+  "description": "Simple, lightweight, ES6 compliant, cross-platform CLI utility to strip whitespace and comments from Javascript source code.",
   "main": "index.js",
   "scripts": {
     "test": "bash test.bash"
