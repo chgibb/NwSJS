@@ -5,6 +5,7 @@ Simple, lightweight, ES6 compliant, cross-platform CLI utility to strip whitespa
 
 [![Build status](https://ci.appveyor.com/api/projects/status/j59s8ni4iimacqkt?svg=true)](https://ci.appveyor.com/project/chgibb/nwsjs)
 [![Build Status](https://travis-ci.org/chgibb/NwSJS.svg?branch=master)](https://travis-ci.org/chgibb/NwSJS)
+[![npm](https://img.shields.io/npm/dt/nwsjs.svg)]()
 
 [![NPM](https://nodei.co/npm/nwsjs.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/nwsjs/)
 
