@@ -1,5 +1,7 @@
 # NwSJS
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/chgibb/NwSJS.svg)](https://greenkeeper.io/)
+
 ## No White Space JavaScript
 Simple, lightweight, ES6 compliant, cross-platform CLI utility to strip whitespace and comments from Javascript source code.
 
